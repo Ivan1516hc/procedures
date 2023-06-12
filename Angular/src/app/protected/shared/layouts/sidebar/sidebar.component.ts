@@ -13,8 +13,11 @@ export interface OpcionSidebar {
 
 export class SidebarComponent {
   @Input() opcionesSidebar: OpcionSidebar[];
+  @Input() urlLogo: string;
 
   constructor() {
-    this.opcionesSidebar = []; // Opcionalmente, puedes inicializarla con un valor vacío
+    this.opcionesSidebar = [];
+    this.urlLogo='';
+    // Opcionalmente, puedes inicializarla con un valor vacío
   }
 }

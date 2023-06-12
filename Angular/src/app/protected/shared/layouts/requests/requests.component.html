@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-body">
+       <h5 class="card-title">Tabla de Solicitudes</h5>
+       <table class="table table-striped">
+          <thead>
+             <tr >
+                <th scope="col" *ngFor="let header of headers">{{header}}</th>
+             </tr>
+          </thead>
+          <tbody>
+             <tr *ngFor="let item of data">
+                <th scope="row">{{item?.id ?? null}}</th>
+                <td>{{item?.madre?.nombre ?? null}}</td>
+                <td>{{item?.situacion.descripcion ?? null}}</td>
+                <td>{{item?.tipo.nombre ?? null}}</td>
+                <td>{{item?.created_at ?? null}}</td>
+                <td><button class=" btn btn-sm btn-success">Aceptar</button>
+               </td>
+               <td><button class=" btn btn-sm btn-danger m-1">Rechazar</button></td>
+               <td><button class=" btn btn-sm btn-info">Ver</button></td>
+             </tr>
+          </tbody>
+       </table>
+    </div>
+ </div>
