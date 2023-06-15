@@ -17,6 +17,10 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'name',
+        'last_name',
+        'mother_last_name',
+        'role_id',
+        'department_id',
         'email',
         'password',
     ];
@@ -35,7 +39,9 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime:Y-m-d H:00',
+        'created_at'  => 'date:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d H:00',
     ];
 
     // Mutador para cifrar la contraseña al guardarla en la base de datos

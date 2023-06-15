@@ -11,9 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('quotes', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('request_id');
+            $table->foreign('request_id')->references('id')->on('requests');
+
+            $table->tinyInteger('attended')->default(0);
+            $table->date('begin');
+            $table->date('finish');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -22,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('quotes');
     }
 };

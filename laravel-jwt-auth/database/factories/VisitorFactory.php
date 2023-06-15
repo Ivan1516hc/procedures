@@ -2,18 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\Department;
-use App\Models\Role;
-use App\Models\User;
+use App\Models\Visitor;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Visitor>
  */
-class UserFactory extends Factory
+class VisitorFactory extends Factory
 {
-    protected $model = User::class;
+    protected $model = Visitor::class;
     /**
      * Define the model's default state.
      *
@@ -25,8 +22,6 @@ class UserFactory extends Factory
             'name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'mother_last_name' => $this->faker->lastName(),
-            'role_id' => Role::all()->random()->id,
-            'department_id' => Department::all()->random()->id,
             'email' => fake()->unique()->safeEmail(),
             'password' => '12345678',
             'email_verified_at' => now(),

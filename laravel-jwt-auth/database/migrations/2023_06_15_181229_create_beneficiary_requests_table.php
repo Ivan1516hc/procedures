@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('procedures', function (Blueprint $table) {
-            $table->tinyIncrements('id');
-            $table->string('name');
+        Schema::create('beneficiary_requests', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('beneficiary_id');
+            $table->foreign('beneficiary_id')->references('id')->on('beneficiaries');
+
+            $table->unsignedBigInteger('request_id');
+            $table->foreign('request_id')->references('id')->on('requests');
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('procedures');
+        Schema::dropIfExists('beneficiary_requests');
     }
 };

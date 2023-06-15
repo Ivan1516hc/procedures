@@ -26,14 +26,6 @@ class ForgotPasswordController extends Controller
         // Generar un nuevo token y guardarlo en la tabla password_reset_tokens
         $token = Password::getRepository()->create($user);
 
-
-
-        // // Guardar el token en la tabla password_reset_tokens sin enviar el correo electrónico
-        // DB::table('password_reset_tokens')->insert([
-        //     'email' => $request->email,
-        //     'token' => $token,
-        //     'created_at' => now()
-        // ]);
         if ($token) {
             // Obtener la dirección de correo electrónico del usuario
             $email = $request->email;

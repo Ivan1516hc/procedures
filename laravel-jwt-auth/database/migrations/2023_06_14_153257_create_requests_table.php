@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('visitor_id');
+            $table->foreign('visitor_id')->references('id')->on('visitors');
+
+            $table->unsignedTinyInteger('procedure_id');
+            $table->foreign('procedure_id')->references('id')->on('procedures');
+
+            $table->tinyInteger('status')->default(1);
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -12,8 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('visitors', function (Blueprint $table) {
-            $table->id();
+            $table->id(); //AI Unsigned Tinyint
+            $table->string('name',25);
+            $table->string('last_name',18);
+            $table->string('mother_last_name',18);
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

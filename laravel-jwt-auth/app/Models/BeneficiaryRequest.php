@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Procedure extends Model
+class BeneficiaryRequest extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'name'
+       'beneficiary_id','request_id'
     ];
 
     protected $casts = [
         'created_at'  => 'date:Y-m-d',
         'updated_at' => 'datetime:Y-m-d H:00',
     ];
-
+    
     public function setAttribute($key, $value)
     {
         parent::setAttribute($key, $value);

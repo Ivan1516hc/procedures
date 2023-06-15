@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id'); //AI Unsigned Tinyint
+            $table->string('question');
+            $table->string('descripcion');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

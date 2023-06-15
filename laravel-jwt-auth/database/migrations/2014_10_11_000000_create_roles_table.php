@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('procedures', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('name');
             $table->timestamps();
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('procedures');
+        Schema::dropIfExists('roles');
     }
 };

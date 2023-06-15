@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Procedure extends Model
+class Beneficiary extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'name'
+        'user_id','curp','nombre','apaterno','amaterno','fechanacimiento','edad','calle','numext','numint','escolaridad','primercruce','segundocruce','vivienda','municipio','codigopostal','colonia','celular','sexo','lenguamaterna','serviciosmedicos','hermanos_en_CDI','edades_hermanos','nombres_hermanos','tipo_sangre','enfermedad','enfermedad_otro','idcapturista','status'
     ];
 
     protected $casts = [

@@ -12,8 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('question_procedures', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
+
+            $table->unsignedSmallInteger('question_id');
+            $table->foreign('question_id')->references('id')->on('questions');
+
+            $table->unsignedTinyInteger('procedure_id');
+            $table->foreign('procedure_id')->references('id')->on('procedures');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

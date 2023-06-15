@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('document_types', function (Blueprint $table) {
-            $table->id();
+            $table->tinyIncrements('id');
+            $table->string('name');
+            $table->string('descripcion');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

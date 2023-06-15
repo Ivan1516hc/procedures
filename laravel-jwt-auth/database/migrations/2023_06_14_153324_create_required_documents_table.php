@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('required_documents', function (Blueprint $table) {
-            $table->id();
+            $table->smallIncrements('id');
+
+            $table->unsignedTinyInteger('procedure_id');
+            $table->foreign('procedure_id')->references('id')->on('procedures');
+
+            $table->tinyInteger('forced')->default(1);
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
