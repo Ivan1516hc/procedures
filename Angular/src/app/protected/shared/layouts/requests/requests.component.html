@@ -10,9 +10,8 @@
           <tbody>
              <tr *ngFor="let item of data">
                 <th scope="row">{{item?.id ?? null}}</th>
-                <td>{{item?.madre?.nombre ?? null}}</td>
-                <td>{{item?.situacion.descripcion ?? null}}</td>
-                <td>{{item?.tipo.nombre ?? null}}</td>
+                <td>{{item?.beneficiaries[0]?.nombre ?? null}} {{item?.beneficiaries[0]?.apaterno ?? null}}</td>
+                <td>{{item?.beneficiaries[0]?.edad ?? null}} AÑOS</td>
                 <td>{{item?.created_at ?? null}}</td>
                 <td><button class=" btn btn-sm btn-success">Aceptar</button>
                </td>

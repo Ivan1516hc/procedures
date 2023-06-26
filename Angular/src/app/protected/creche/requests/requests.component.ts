@@ -10,7 +10,7 @@ export class RequestsComponent {
   request: any=[];
   hayError: boolean=false;
   data = [];
-  header=['Id','Madre','Situación','Tipo','Fecha'];
+  header=['Id','Solicitante','Beneficiario','Fecha'];
 
   constructor(private allService:AllService){}
 
@@ -21,7 +21,7 @@ export class RequestsComponent {
   private initTable(){
     this.allService.index().subscribe({next:(request)=>{
         this.request=request;
-        this.data = this.request.datos.data;
+        this.data = this.request.data;
       },error:()=>{
         this.hayError=true;
         this.request=[];

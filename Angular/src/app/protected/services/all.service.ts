@@ -12,12 +12,7 @@ export class AllService {
   constructor(private http:HttpClient) { }
 
   index():Observable<any[]>{
-    const url= `${this.baseUrl}/admin/get-solicitudes`;
+    const url= `${this.baseUrl}/request`;
     return this.http.get<any[]>(url);
-  }
-
-  delete($id:number):Observable<any>{
-    const url= `${this.baseUrl}/economic-activity/delete/${$id}`;
-    return this.http.get<any>(url);
   }
 }
