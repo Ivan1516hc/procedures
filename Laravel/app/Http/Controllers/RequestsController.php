@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RequestsController extends Controller
 {
@@ -12,7 +13,17 @@ class RequestsController extends Controller
      */
     public function index()
     {
-        $query = Requests::with('visitor','beneficiaries','procedure')->paginate();
+        // $user = Auth::user();
+        $model = Requests::query();
+        // ($user->role_id == 2 ? $model->where('procedure_id', $user->department_id)->where('status','<>',0) : null);
+        // ($user->department_id == 2 ? $model->with('centro.sala') : null);
+        // ($user->profile_id == 2 ? $model->whereHas('user', function ($query) use ($user) {
+        //     return  $query->where('location_id', $user->location_id);
+        // }) : null);
+
+        $query = $model->has('beneficiaries')->with(['beneficiaries' => function ($query) {
+            $query->orderBy('edad', 'asc');
+        }])->with('priority')->paginate();
         return response()->json($query);
     }
 

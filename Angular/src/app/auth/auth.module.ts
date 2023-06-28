@@ -4,13 +4,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './pages/login/login.component';
-import { MainComponent } from './pages/main/main.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    MainComponent
+    LoginComponent
   ],
   imports: [
     CommonModule,

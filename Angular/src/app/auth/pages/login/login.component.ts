@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent  {
 
-  logoSrc= 'assets/images/Logo_DIF.png';
+  urlLogo='/api/guarderia/dashboard';
 
   miFormulario:FormGroup = this.fb.group({
     email:['',[Validators.required,Validators.email]],
@@ -30,7 +30,7 @@ export class LoginComponent  {
         const code=parseInt(localStorage.getItem('code')!);
         localStorage.removeItem('code')
         if(code==1){
-          this.router.navigateByUrl('/dashboard')
+          this.router.navigateByUrl('/api/guarderia/dashboard')
         }if(code==2){
           this.router.navigateByUrl('/api/dashboard')
         }

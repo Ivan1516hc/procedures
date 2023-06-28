@@ -1,24 +1,30 @@
 <div class="card">
-    <div class="card-body">
-       <h5 class="card-title">Tabla de Solicitudes</h5>
-       <table class="table table-striped">
-          <thead>
-             <tr >
-                <th scope="col" *ngFor="let header of headers">{{header}}</th>
-             </tr>
-          </thead>
-          <tbody>
-             <tr *ngFor="let item of data">
-                <th scope="row">{{item?.id ?? null}}</th>
-                <td>{{item?.beneficiaries[0]?.nombre ?? null}} {{item?.beneficiaries[0]?.apaterno ?? null}}</td>
-                <td>{{item?.beneficiaries[0]?.edad ?? null}} AÑOS</td>
-                <td>{{item?.created_at ?? null}}</td>
-                <td><button class=" btn btn-sm btn-success">Aceptar</button>
-               </td>
+   <div class="card-body">
+      <h5 class="card-title">Tabla de Solicitudes</h5>
+      <table class="table table-striped">
+         <thead>
+            <tr>
+               <th scope="col" *ngFor="let header of headers">{{header}}</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let item of data">
+               <th scope="row">{{item.id}}</th>
+               <td>{{item.beneficiaries[0].nombre}} {{item.beneficiaries[0].apaterno}}</td>
+               <td>{{item.beneficiaries[0].edad}} AÑOS</td>
+               <td>{{item.beneficiaries[1]?.nombre ?? null}} {{item.beneficiaries[1]?.apaterno ?? null}}</td>
+               <td>
+                  <div class="text-center" [ngClass]="item.priority_id === 3 ? 'alert-danger' : item.priority_id === 2 ? 'alert-warning' : 'alert-success'">
+                     {{item.priority.name}}
+                  </div>
+                </td>
+               <td>Pendiente</td>
+               <td>{{item.created_at ?? null}}</td>
+               <td><button class=" btn btn-sm btn-success">Aceptar</button></td>
                <td><button class=" btn btn-sm btn-danger m-1">Rechazar</button></td>
                <td><button class=" btn btn-sm btn-info">Ver</button></td>
-             </tr>
-          </tbody>
-       </table>
-    </div>
- </div>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>

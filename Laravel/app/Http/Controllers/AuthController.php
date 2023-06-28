@@ -35,7 +35,14 @@ class AuthController extends Controller
         if (!$token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return $this->createNewToken($token);
+        $this->createNewToken($token);
+        $email = $request->only('email');
+        $user = User::where('email',$email)->first();
+        $id = $user->id;
+        $query = $user->role_id;
+        $ok = true;
+        $name = $user->name;
+        return response()->json(compact('ok','token','query','id','name'));
     }
     /**
      * Register a User.

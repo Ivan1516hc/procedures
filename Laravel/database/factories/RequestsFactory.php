@@ -2,9 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Priority;
 use App\Models\Procedure;
 use App\Models\Requests;
-use App\Models\Visitor;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,8 +22,9 @@ class RequestsFactory extends Factory
     public function definition(): array
     {
         return [
-            'visitor_id' => Visitor::all()->random()->id,
+            'user_id' => User::all()->random()->id,
             'procedure_id' => Procedure::all()->random()->id,
+            'priority_id' => Priority::all()->random()->id,
             'status' => $this->faker->randomElement([0,1,2]),
         ];
     }

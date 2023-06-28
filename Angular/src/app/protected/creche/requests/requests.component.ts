@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AllService } from '../../services/all.service';
+import { Requests, RequestsResponse } from '../../interfaces/requests-interface';
 
 @Component({
   selector: 'app-requests-creche',
@@ -7,10 +8,10 @@ import { AllService } from '../../services/all.service';
 })
 export class RequestsComponent {
 
-  request: any=[];
+  request: Requests;
   hayError: boolean=false;
-  data = [];
-  header=['Id','Solicitante','Beneficiario','Fecha'];
+  data: RequestsResponse[];
+  header=['Id','Beneficiario','Edad','Tutor','Prioridad','Grado','Fecha'];
 
   constructor(private allService:AllService){}
 
@@ -24,7 +25,6 @@ export class RequestsComponent {
         this.data = this.request.data;
       },error:()=>{
         this.hayError=true;
-        this.request=[];
       }
     });
   }

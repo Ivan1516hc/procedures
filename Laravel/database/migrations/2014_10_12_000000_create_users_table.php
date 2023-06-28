@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
 
-            $table->smallIncrements('id'); //AI Unsigned Tinyint
+            $table->id(); //AI Unsigned Tinyint
             $table->string('name',25);
-            $table->string('last_name',18);
-            $table->string('mother_last_name',18);
+            $table->string('last_name',18)->nullable();
+            $table->string('mother_last_name',18)->nullable();
 
-            $table->unsignedTinyInteger('role_id');
+            $table->unsignedTinyInteger('role_id')->default(1);
             $table->foreign('role_id')->references('id')->on('roles');
 
-            $table->unsignedTinyInteger('department_id');
+            $table->unsignedTinyInteger('department_id')->default(1);
             $table->foreign('department_id')->references('id')->on('departments');
 
             $table->string('email')->unique();

@@ -9,7 +9,7 @@ class Requests extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'visitor_id','procedure_id','status'
+       'user_id','procedure_id','status','priority_id'
     ];
 
     protected $casts = [
@@ -26,9 +26,14 @@ class Requests extends Model
         return $this->hasMany('App\Models\RequestDocument', 'request_id', 'id');
     }
 
-    public function visitor()
+    public function user()
     {
-        return $this->hasOne('App\Models\Visitor', 'id', 'visitor_id');
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
+
+    public function priority()
+    {
+        return $this->hasOne('App\Models\Priority', 'id', 'priority_id');
     }
 
     public function procedure()

@@ -76,4 +76,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne('App\Models\Role', 'id', 'role_id');
     }
+
+    public function setAttribute($key, $value)
+    {
+        parent::setAttribute($key, $value);
+
+        if (is_string($value) && $key != 'password')
+            $this->attributes[$key] = trim(mb_strtoupper($value));
+    }
 }

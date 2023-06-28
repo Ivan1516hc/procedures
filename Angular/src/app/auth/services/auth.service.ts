@@ -23,7 +23,7 @@ export class AuthService {
 
   login(email:string, password:string){
 
-    const url =`${this.baseUrl}/login`
+    const url =`${this.baseUrl}/auth/login`
     const body={email, password}
 
     return this.http.post<AuthResponse>(url,body).pipe(

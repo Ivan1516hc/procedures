@@ -20,7 +20,7 @@ class QuestionsFactory extends Factory
     {
         return [
             'question' => $this->faker->sentence,
-            'descripcion' => $this->faker->paragraph,
+            'descripcion' => $this->faker->sentence,
         ];
     }
 }
