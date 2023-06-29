@@ -9,7 +9,7 @@ class Quote extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'request_id','attended','begin','finish'
+       'request_id','attended','date','hour'
     ];
 
     protected $casts = [

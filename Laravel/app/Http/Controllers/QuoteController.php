@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Requests;
+use App\Models\Quote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RequestsController extends Controller
+class QuoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class RequestsController extends Controller
         // if($user->role_id == 1){
         //     return;
         // }
-        $model = Requests::query();
-        $model->where('procedure_id', $user->department_id)->where('status','<>',0);
+        $model = Quote::query();
+        // $model->where('procedure_id', $user->department_id)->where('status','<>',0);
         // ($user->department_id == 2 ? $model->with('centro.sala') : null);
         // ($user->department_id == 3 ? $model->with('centro.sala') : null);
         // ($user->department_id == 4 ? $model->with('centro.sala') : null);
@@ -28,9 +28,14 @@ class RequestsController extends Controller
         //     return  $query->where('location_id', $user->location_id);
         // }) : null);
 
-        $query = $model->has('beneficiaries')->orderBy('id','asc')->with(['beneficiaries' => function ($query) {
+        $query = $model
+        ->has('request.beneficiaries')->orderBy('date','asc')->orderBy('hour','asc')
+        ->with(['request.priority','request.beneficiaries' => function ($query) {
             $query->orderBy('edad', 'asc');
-        }])->with('priority')->paginate();
+        }])->whereHas('request', function ($query) use ($user) {
+            $query->where('procedure_id', $user->department_id);
+        })->paginate();
+        // ->with('request')->paginate();
         return response()->json($query);
     }
 
@@ -53,7 +58,7 @@ class RequestsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Requests $requests)
+    public function show(Quote $quote)
     {
         //
     }
@@ -61,7 +66,7 @@ class RequestsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Requests $requests)
+    public function edit(Quote $quote)
     {
         //
     }
@@ -69,7 +74,7 @@ class RequestsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Requests $requests)
+    public function update(Request $request, Quote $quote)
     {
         //
     }
@@ -77,7 +82,7 @@ class RequestsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Requests $requests)
+    public function destroy(Quote $quote)
     {
         //
     }

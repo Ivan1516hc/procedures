@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { validarTokenGuard } from './guards/validar-token.guard';
 
 const routes: Routes = [
   {
@@ -14,14 +15,12 @@ const routes: Routes = [
   {
     path: 'api',
     loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule),
-    // canActivate: [ValidarTokenAdminGuard],
-    // canLoad: [ValidarTokenAdminGuard]
+    canActivate: [validarTokenGuard]
   },
   {
     path: '',
     loadChildren: () => import('./visitor/visitor.module').then(m => m.VisitorModule),
-    // canActivate: [ValidarTokenGuard],
-    // canLoad: [ValidarTokenGuard]
+    // canActivate: [validarTokenGuard]
   },
   {
     path: '**',

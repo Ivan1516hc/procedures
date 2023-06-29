@@ -1,7 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { validarTokenGuard } from '../guards/validar-token.guard';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'guarderia',
+    loadChildren: () => import('./creche/creche.module').then(m => m.CrecheModule),
+    canActivate: [validarTokenGuard]
+  },
+  {
+    path: 'autismo',
+    loadChildren: () => import('./autism/autism.module').then(m => m.AutismModule),
+    canActivate: [validarTokenGuard]
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule),
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

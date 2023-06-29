@@ -20,7 +20,7 @@ export class RequestsComponent {
   }
 
   private initTable(){
-    this.allService.index().subscribe({next:(request)=>{
+    this.allService.indexRequest().subscribe({next:(request)=>{
         this.request=request;
         this.data = this.request.data;
       },error:()=>{

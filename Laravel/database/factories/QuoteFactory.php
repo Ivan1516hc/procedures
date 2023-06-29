@@ -19,11 +19,12 @@ class QuoteFactory extends Factory
      */
     public function definition(): array
     {
+        $horarios = ['08:00', '10:00', '14:00', '16:00'];
         return [
             'request_id' => Requests::all()->random()->id,
             'attended' => $this->faker->randomElement([0,1,2]),
-            'begin' => $this->faker->dateTimeBetween('+1 day', '+2 day'),
-            'finish' => $this->faker->dateTimeBetween('+2 day', '+3 day'),
+            'date' => $this->faker->dateTimeBetween('+1 day', '+2 day'),
+            'hour' => $this->faker->randomElement($horarios),
         ];
     }
 }

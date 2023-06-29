@@ -5,14 +5,10 @@ const routes: Routes = [
   {
     path: 'guarderia',
     loadChildren: () => import('./creche/creche.module').then(m => m.CrecheModule),
-    // canActivate: [ValidarTokenAdminGuard],
-    // canLoad: [ValidarTokenAdminGuard]
   },
   {
     path: 'autismo',
     loadChildren: () => import('./autism/autism.module').then(m => m.AutismModule),
-    // canActivate: [ValidarTokenGuard],
-    // canLoad: [ValidarTokenGuard]
   },
 ];
 

@@ -42,26 +42,12 @@ export class AuthService {
     )
   }
 
-  validarTokenUser():Observable<boolean>{
-    const url=`${this.baseUrl}/validate`;
+  validarToken():Observable<boolean>{
+    const url=`${this.baseUrl}/auth/validate`;
     const headers=new HttpHeaders().set('Authorization','Bearer '+localStorage.getItem('token')||'');
     return this.http.get<Validate>(url,{headers}).pipe(
       map(response=>{
-        if(response.type == 1){
-          return response.ok;
-        }
-        return false;
-      }),
-      catchError(err=>of(false))
-    )
-  }
-
-  validarTokenAdmin():Observable<boolean>{
-    const url=`${this.baseUrl}/validate`;
-    const headers=new HttpHeaders().set('Authorization','Bearer '+localStorage.getItem('token')||'');
-    return this.http.get<Validate>(url,{headers}).pipe(
-      map(response=>{
-        if(response.type == 2){
+        if(response.type){
           return response.ok;
         }
         return false;

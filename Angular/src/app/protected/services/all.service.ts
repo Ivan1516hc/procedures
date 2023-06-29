@@ -12,8 +12,13 @@ export class AllService {
 
   constructor(private http:HttpClient) { }
 
-  index():Observable<Requests>{
+  indexRequest():Observable<Requests>{
     const url= `${this.baseUrl}/request`;
     return this.http.get<Requests>(url);
+  }
+
+  indexQuote():Observable<any>{
+    const url= `${this.baseUrl}/quote`;
+    return this.http.get<any>(url);
   }
 }

@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Exception;
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Validator;
 
 class AuthController extends Controller
@@ -112,5 +117,39 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()
         ]);
+    }
+
+    public function validarToken(){
+        try{
+            JWTAuth::parseToken()->authenticate();
+            $type = Auth::user()->role_id;
+            return response()->json([
+                'ok'    => true,
+                'type'  => $type,
+                'status'=>'Token Correcto'
+            ],200);
+
+        }catch(Exception $e){
+            if($e instanceof TokenInvalidException){
+                return response()->json([
+                    'ok'    => false,
+                    'type'  => 0,
+                    'status'=>'Token Invalido'
+            ],401);
+            }
+            if($e instanceof TokenExpiredException){
+                return response()->json([
+                    'ok'    => false,
+                    'type'  => 0,
+                    'status'=>'Token Expirado'
+                ],401);
+            }
+
+            return response()->json([
+                'ok'    => false,
+                'type'  => 0,
+                'status'=>'Token no Encontrado'
+            ],401);
+        }
     }
 }

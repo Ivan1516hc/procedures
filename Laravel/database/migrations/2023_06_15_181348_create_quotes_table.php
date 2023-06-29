@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreign('request_id')->references('id')->on('requests');
 
             $table->tinyInteger('attended')->default(0);
-            $table->date('begin');
-            $table->date('finish');
+            $table->date('date');
+            $table->time('hour');
 
             $table->timestamps();
             $table->softDeletes();
