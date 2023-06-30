@@ -18,7 +18,7 @@ class Answer extends Model
     ];
     public function question()
     {
-        return $this->hasOne('App\Models\Question', 'id', 'question_id');
+        return $this->hasOne('App\Models\Questions', 'id', 'question_id');
     }
     public function request()
     {

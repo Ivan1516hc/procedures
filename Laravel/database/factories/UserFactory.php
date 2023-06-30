@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Center;
 use App\Models\Department;
 use App\Models\Role;
 use App\Models\User;
@@ -28,8 +29,9 @@ class UserFactory extends Factory
             'role_id' => Role::all()->random()->id,
             'department_id' => Department::all()->random()->id,
             'email' => fake()->unique()->safeEmail(),
-            'password' => '12345678',
+            'password' => 12345678,
             'email_verified_at' => now(),
+            'center_id' => Center::all()->random()->id,
         ];
     }
 

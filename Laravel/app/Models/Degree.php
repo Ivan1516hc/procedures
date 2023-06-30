@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RequestDocument extends Model
+class Degree extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'required_document_id','request_id','url'
+        'name'
     ];
 
     protected $casts = [
@@ -17,15 +17,10 @@ class RequestDocument extends Model
         'updated_at' => 'datetime:Y-m-d H:00',
     ];
 
-    public function requiredDocument()
-    {
-        return $this->hasOne('App\Models\RequiredDocument', 'id', 'required_document_id');
-    }
-    
-    public function request()
-    {
-        return $this->hasOne('App\Models\Requests', 'id', 'request_id');
-    }
+    public function creches()
+     {
+         return $this->hasMany('App\Models\Creche', 'degree_id', 'id');
+     }
 
     public function setAttribute($key, $value)
     {

@@ -24,6 +24,9 @@ return new class extends Migration
             $table->unsignedTinyInteger('department_id')->default(1);
             $table->foreign('department_id')->references('id')->on('departments');
 
+            $table->unsignedTinyInteger('center_id')->default(1);
+            $table->foreign('center_id')->references('id')->on('centers');
+
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

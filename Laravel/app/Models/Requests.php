@@ -9,7 +9,7 @@ class Requests extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'user_id','procedure_id','status','priority_id'
+       'user_id','procedure_id','status','priority_id','center_id'
     ];
 
     protected $casts = [
@@ -26,6 +26,16 @@ class Requests extends Model
         return $this->hasMany('App\Models\RequestDocument', 'request_id', 'id');
     }
 
+    public function quotes()
+    {
+        return $this->hasMany('App\Models\Quote', 'request_id', 'id');
+    }
+
+    public function answer()
+    {
+        return $this->hasMany('App\Models\Answer', 'request_id', 'id');
+    }
+
     public function user()
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
@@ -39,6 +49,10 @@ class Requests extends Model
     public function procedure()
     {
         return $this->hasOne('App\Models\Procedure', 'id', 'procedure_id');
+    }
+    public function center()
+    {
+        return $this->hasOne('App\Models\Center', 'id', 'center_id');
     }
 
     public function setAttribute($key, $value)

@@ -21,9 +21,13 @@ class Beneficiary extends Model
         return $this->belongsToMany(Requests::class,'beneficiary_requests','beneficiary_id','request_id');
     }
 
-    public function profilesUsers()
+    public function creches(){
+        return $this->belongsToMany(Creche::class,'beneficiary_creches','beneficiary_id','creche_id');
+    }
+
+    public function beneficiaryCreche()
     {
-        return $this->hasMany('App\Models\ProfilesUser', 'profile_id', 'id');
+        return $this->hasMany('App\Models\BeneficiaryCreche', 'beneficiary_id', 'id');
     }
 
     public function setAttribute($key, $value)

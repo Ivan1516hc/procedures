@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Center;
 use App\Models\Priority;
 use App\Models\Procedure;
 use App\Models\Requests;
@@ -25,6 +26,7 @@ class RequestsFactory extends Factory
             'user_id' => User::all()->random()->id,
             'procedure_id' => Procedure::all()->random()->id,
             'priority_id' => Priority::all()->random()->id,
+            'center_id' => Center::all()->random()->id,
             'status' => $this->faker->randomElement([0,1,2]),
         ];
     }

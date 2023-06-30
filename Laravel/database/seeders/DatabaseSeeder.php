@@ -6,7 +6,13 @@ namespace Database\Seeders;
 
 use App\Models\Answer;
 use App\Models\Beneficiary;
+use App\Models\BeneficiaryCreche;
 use App\Models\BeneficiaryRequest;
+use App\Models\Center;
+use App\Models\CenterProcedure;
+use App\Models\Creche;
+use App\Models\CrecheRequest;
+use App\Models\Degree;
 use App\Models\Department;
 use App\Models\DocumentType;
 use App\Models\Priority;
@@ -18,6 +24,7 @@ use App\Models\RequestDocument;
 use App\Models\Requests;
 use App\Models\RequiredDocument;
 use App\Models\Role;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -38,6 +45,7 @@ class DatabaseSeeder extends Seeder
             'name'                  => 'ALTA'
         ]);
         // Priority::factory(3)->create();
+        Center::factory(10)->create();
         Department::factory(5)->create();
         Role::factory(3)->create();
         User::factory(200)->create();
@@ -53,5 +61,11 @@ class DatabaseSeeder extends Seeder
         RequestDocument::factory(120)->create();
         BeneficiaryRequest::factory(150)->create();
         Quote::factory(60)->create();
+        Degree::factory(5)->create();
+        Room::factory(5)->create();
+        CenterProcedure::factory(10)->create();
+        Creche::factory(15)->create();
+        CrecheRequest::factory(50)->create();
+        BeneficiaryCreche::factory(30)->create();
     }
 }

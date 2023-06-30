@@ -23,6 +23,7 @@ class User extends Authenticatable implements JWTSubject
         'department_id',
         'email',
         'password',
+        'center_id'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -76,6 +77,16 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne('App\Models\Role', 'id', 'role_id');
     }
+
+    public function center()
+    {
+        return $this->hasOne('App\Models\Center', 'id', 'center_id');
+    }
+
+    public function requests()
+     {
+         return $this->hasMany('App\Models\Requests', 'user_id', 'id');
+     }
 
     public function setAttribute($key, $value)
     {

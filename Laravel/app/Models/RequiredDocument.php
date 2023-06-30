@@ -22,7 +22,7 @@ class RequiredDocument extends Model
         return $this->hasOne('App\Models\Procedure', 'id', 'procedure_id');
     }
     
-    public function document_type()
+    public function documentType()
     {
         return $this->hasOne('App\Models\Document_type', 'id', 'document_type_id');
     }

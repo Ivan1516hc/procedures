@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RequestDocument extends Model
+class CenterProcedure extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'required_document_id','request_id','url'
+        'procedure_id','center_id'
     ];
 
     protected $casts = [
@@ -17,14 +17,14 @@ class RequestDocument extends Model
         'updated_at' => 'datetime:Y-m-d H:00',
     ];
 
-    public function requiredDocument()
+    public function procedure()
     {
-        return $this->hasOne('App\Models\RequiredDocument', 'id', 'required_document_id');
+        return $this->hasOne('App\Models\Procedure', 'id', 'procedure_id');
     }
-    
-    public function request()
+
+    public function center()
     {
-        return $this->hasOne('App\Models\Requests', 'id', 'request_id');
+        return $this->hasOne('App\Models\Center', 'id', 'center_id');
     }
 
     public function setAttribute($key, $value)
