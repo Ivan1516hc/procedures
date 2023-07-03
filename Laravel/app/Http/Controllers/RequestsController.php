@@ -19,7 +19,7 @@ class RequestsController extends Controller
         // }
         $model = Requests::query();
         $model->where('procedure_id', $user->department_id)->where('status','<>',0);
-        // ($user->department_id == 2 ? $model->with('centro.sala') : null);
+        ($user->department_id == 2 ? $model->with('crecheRequest.creche.degree') : null);
         // ($user->department_id == 3 ? $model->with('centro.sala') : null);
         // ($user->department_id == 4 ? $model->with('centro.sala') : null);
         // ($user->department_id == 5 ? $model->with('centro.sala') : null);

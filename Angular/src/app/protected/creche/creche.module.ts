@@ -8,6 +8,7 @@ import { CrecheComponent } from './creche.component';
 import { RequestsComponent } from './requests/requests.component';
 import { QuotesComponent } from './quotes/quotes.component';
 import { BeneficiariesComponent } from './beneficiaries/beneficiaries.component';
+import { CareCenterComponent } from './care-center/care-center.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { BeneficiariesComponent } from './beneficiaries/beneficiaries.component'
     CrecheComponent,
     RequestsComponent,
     QuotesComponent,
-    BeneficiariesComponent
+    BeneficiariesComponent,
+    CareCenterComponent
   ],
   imports: [
     CommonModule,

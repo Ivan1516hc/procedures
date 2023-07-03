@@ -61,8 +61,44 @@ class DatabaseSeeder extends Seeder
         RequestDocument::factory(120)->create();
         BeneficiaryRequest::factory(150)->create();
         Quote::factory(60)->create();
-        Degree::factory(5)->create();
-        Room::factory(5)->create();
+        // Degree::factory(5)->create();
+        Degree::factory()->create([
+            'name'  => 'LACTANTE'
+        ]);
+        Degree::factory()->create([
+            'name'  => 'MATERNAL'
+        ]);
+        Degree::factory()->create([
+            'name'  => 'PRESCOLAR'
+        ]);
+        // Room::factory(5)->create();
+        Room::factory()->create([
+            'name'  => 'LAC'
+        ]);
+        Room::factory()->create([
+            'name'  => 'MAT A'
+        ]);
+        Room::factory()->create([
+            'name'  => 'MAT AB'
+        ]);
+        Room::factory()->create([
+            'name'  => 'MAT BC'
+        ]);
+        Room::factory()->create([
+            'name'  => 'MAT C'
+        ]);
+        Room::factory()->create([
+            'name'  => 'PRES 1'
+        ]);
+        Room::factory()->create([
+            'name'  => 'PRES 1 A'
+        ]);
+        Room::factory()->create([
+            'name'  => 'PRES 2'
+        ]);
+        Room::factory()->create([
+            'name'  => 'PRES 3'
+        ]);
         CenterProcedure::factory(10)->create();
         Creche::factory(15)->create();
         CrecheRequest::factory(50)->create();

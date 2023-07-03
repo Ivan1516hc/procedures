@@ -1,0 +1,48 @@
+<app-creche>
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Salas</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Salas</li>
+                </ol>
+            </nav>
+        </div>
+        <section class="section dashboard">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Tabla de Salas</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" *ngFor="let header of headers">{{header}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of data">
+                                <th scope="row">{{item.id}}</th>
+                                <td>{{item.degree.name ?? null}}</td>
+                                <td>{{item.room.name ?? null}}</td>
+                                <td>{{item.capacity ?? null}}</td>
+                                <td>{{item.beneficiry_count ?? null}}</td>
+                                <td>
+                                    <div class="text-center" [ngClass]="item?.process > 0 ? 'alert-success' : ''">
+                                        {{item.process ?? null}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-center" [ngClass]="item?.refused > 0 ? 'alert-danger' : ''">
+                                        {{item.refused ?? null}}
+                                    </div>
+                                </td>
+                                <td>{{item.capacity - item.beneficiry_count ?? null}}</td>
+                                <td><button class=" btn btn-sm btn-info">Ver Datos</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</app-creche>

@@ -9,7 +9,7 @@ export class BeneficiariesComponent {
   beneficiaries: any;
   hayError: boolean=false;
   data: any[];
-  header=['Id','Beneficiario','Prioridad','Grado','Fecha','Horario'];
+  header=['Id','Beneficiario','Fecha Nacimiento','Estado','Grado','Sala'];
 
   constructor(private allService:AllService){}
 

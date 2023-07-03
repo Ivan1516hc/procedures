@@ -21,6 +21,10 @@ class Requests extends Model
         return $this->belongsToMany(Beneficiary::class,'beneficiary_requests','request_id','beneficiary_id');
     }
 
+    public function crecheRequest(){
+        return $this->hasMany('App\Models\CrecheRequest', 'request_id', 'id');
+    } 
+
     public function requestDocuments()
     {
         return $this->hasMany('App\Models\RequestDocument', 'request_id', 'id');

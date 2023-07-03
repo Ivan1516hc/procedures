@@ -30,7 +30,7 @@ class QuoteController extends Controller
 
         $query = $model
         ->has('request.beneficiaries')->orderBy('date','asc')->orderBy('hour','asc')
-        ->with(['request.priority','request.beneficiaries' => function ($query) {
+        ->with(['request.crecheRequest.creche.degree','request.priority','request.beneficiaries' => function ($query) {
             $query->orderBy('edad', 'asc');
         }])->whereHas('request', function ($query) use ($user) {
             $query->where('procedure_id', $user->department_id);

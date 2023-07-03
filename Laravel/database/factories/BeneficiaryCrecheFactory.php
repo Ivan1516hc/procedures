@@ -21,7 +21,7 @@ class BeneficiaryCrecheFactory extends Factory
         return [
             'creche_id' => Creche::all()->random()->id,
             'beneficiary_id' => Beneficiary::all()->random()->id,
-            'status' =>$this->faker->randomElement([1,2])
+            'status' =>$this->faker->randomElement([0,1])
         ];
     }
 }

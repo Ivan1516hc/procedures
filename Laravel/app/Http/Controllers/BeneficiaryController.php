@@ -16,9 +16,10 @@ class BeneficiaryController extends Controller
         $user = Auth::user();
         $model = Beneficiary::query();
 
-        $query = $model->has('beneficiaryCreche')->with('beneficiaryCreche')//->with(['beneficiaryCreche.creche' => function ($query) use ($user) {
-            //$query->where('center_id',$user->center_id);
-        //}])
+        $query = $model->has('beneficiaryCreche')->whereHas('beneficiaryCreche.creche',function ($query) use ($user) {
+            $query->where('center_id',$user->center_id);
+        })
+        ->with('beneficiaryCreche.creche','beneficiaryCreche.creche.room','beneficiaryCreche.creche.degree')
         ->paginate();
         return response()->json($query);
     }

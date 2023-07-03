@@ -16,9 +16,13 @@ class CrecheController extends Controller
         $user = Auth::user();
         $model = Creche::query();
         $query = $model
-        ->orderBy('degree_id','asc') // ->where('center_id',$user->center_id)
+        ->orderBy('degree_id','asc')->where('center_id',$user->center_id)
         ->withCount(['beneficiryCreche as beneficiry_count' => function ($query){
             return $query->where('status',1);
+        },'requests as process' => function ($query){
+            return $query->where('status',1);
+        },'requests as refused' => function ($query){
+            return $query->where('status',0);
         }])->with('degree','room')->paginate();
         return response()->json($query);
     }

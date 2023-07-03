@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RequestsComponent } from './requests/requests.component';
 import { QuotesComponent } from './quotes/quotes.component';
 import { BeneficiariesComponent } from './beneficiaries/beneficiaries.component';
+import { CareCenterComponent } from './care-center/care-center.component';
 
 const routes: Routes = [{
   path: '',
@@ -12,6 +13,7 @@ const routes: Routes = [{
     {path: 'solicitudes', component:RequestsComponent},
     {path: 'citas', component:QuotesComponent},
     {path: 'beneficiarios', component:BeneficiariesComponent},
+    {path: 'salas', component:CareCenterComponent},
     //------------------------------------------------------------------------------------------------------
     {path: '**', redirectTo: 'dashboard'},
   ]

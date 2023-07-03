@@ -46,6 +46,10 @@ class Creche extends Model
         return $this->belongsToMany(Beneficiary::class,'beneficiary_creches','creche_id','beneficiary_id'); //best practice name relacinship report_user
     }
 
+    public function requests(){
+        return $this->belongsToMany(Requests::class,'creche_requests','creche_id','request_id'); //best practice name relacinship report_user
+    }
+
     public function setAttribute($key, $value)
     {
         parent::setAttribute($key, $value);

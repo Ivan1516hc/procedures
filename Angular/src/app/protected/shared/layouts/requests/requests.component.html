@@ -18,10 +18,12 @@
                      {{item.priority.name}}
                   </div>
                 </td>
-               <td>Pendiente</td>
+               <td>{{item.creche_request[0]?.creche?.degree?.name ?? null}}</td>
                <td>{{item.created_at ?? null}}</td>
-               <td><button class=" btn btn-sm btn-success">Aceptar</button></td>
-               <td><button class=" btn btn-sm btn-danger m-1">Rechazar</button></td>
+               <td>{{item.status == 1 ? 'En proceso' : (item.status == 2 ? 'Aceptado' : (item.status == 3 ? 'Rechazado' : null))}}</td>
+               <td *ngIf="item.status == 0"><button class=" btn btn-sm btn-success m-1">Aceptar</button></td>
+               <td *ngIf="item.status == 0"><button class=" btn btn-sm btn-danger m-1">Rechazar</button></td>
+               <td *ngIf="item.status == 1"><button class=" btn btn-sm btn-secondary m-1">Reactivar</button></td>
                <td><button class=" btn btn-sm btn-info">Ver</button></td>
             </tr>
          </tbody>

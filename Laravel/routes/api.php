@@ -52,9 +52,9 @@ Route::middleware('cors')->group(function () {
         //Requests
         Route::get('request', [RequestsController::class, 'index']);
         Route::get('quote', [QuoteController::class, 'index']);
+        Route::get('creche', [CrecheController::class, 'index']);
+        Route::get('beneficiary', [BeneficiaryController::class, 'index']);
     });
-    Route::get('creche', [CrecheController::class, 'index']);
-    Route::get('beneficiary', [BeneficiaryController::class, 'index']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

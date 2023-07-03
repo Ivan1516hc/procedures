@@ -16,7 +16,7 @@
                      {{item.request?.priority.name}}
                   </div>
                 </td>
-               <td>Pendiente</td>
+               <td>{{item.request?.creche_request[0]?.creche?.degree?.name}}</td>
                <td>{{item.date ?? null}}</td>
                <td>{{item.hour ?? null}}</td>
                <td><button class=" btn btn-sm btn-success">Asistio</button></td>

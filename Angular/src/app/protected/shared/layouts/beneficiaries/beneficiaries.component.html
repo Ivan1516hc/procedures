@@ -1,6 +1,6 @@
 <div class="card">
    <div class="card-body">
-      <h5 class="card-title">Tabla de Citas</h5>
+      <h5 class="card-title">Tabla de Beneficiarios</h5>
       <table class="table table-striped">
          <thead>
             <tr>
@@ -12,9 +12,13 @@
                <th scope="row">{{item.id}}</th>
                <td>{{item.nombre ?? null}} {{item.apaterno ?? null}}</td>
                <td>{{item.fechanacimiento ?? null}}</td>
-               <td>{{item.hour ?? null}}</td>
-               <td><button class=" btn btn-sm btn-success">Asistio</button></td>
-               <td><button class=" btn btn-sm btn-danger m-1">No asistio</button></td>
+               <td>
+                  <div class="text-center" [ngClass]="item.beneficiary_creche[0].status == 0 ? 'alert-danger' :  'alert-success' ">
+                     {{item.beneficiary_creche[0].status == 1 ? 'ACTIVO' : 'INACTIVO' }}
+                  </div>
+               </td>
+               <td>{{item.beneficiary_creche[0].creche.degree.name ?? null}}</td>
+               <td>{{item.beneficiary_creche[0].creche.room.name ?? null}}</td>
                <td><button class=" btn btn-sm btn-info">Ver Datos</button></td>
             </tr>
          </tbody>

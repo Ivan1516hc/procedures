@@ -29,9 +29,9 @@ export class LoginComponent  {
       if(response.ok === true){
         const code=parseInt(localStorage.getItem('code')!);
         localStorage.removeItem('code')
-        if(code==1){
+        if(code==2){
           this.router.navigateByUrl('/api/guarderia/dashboard')
-        }if(code==2){
+        }if(code==1){
           this.router.navigateByUrl('/api/dashboard')
         }
       }else{
