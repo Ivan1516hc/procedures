@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Creche;
+use App\Models\Beneficiary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CrecheController extends Controller
+class BeneficiaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,12 @@ class CrecheController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $model = Creche::query();
-        $query = $model
-        ->orderBy('degree_id','asc') // ->where('center_id',$user->center_id)
-        ->withCount(['beneficiryCreche as beneficiry_count' => function ($query){
-            return $query->where('status',1);
-        }])->with('degree','room')->paginate();
+        $model = Beneficiary::query();
+
+        $query = $model->has('beneficiaryCreche')->with('beneficiaryCreche')//->with(['beneficiaryCreche.creche' => function ($query) use ($user) {
+            //$query->where('center_id',$user->center_id);
+        //}])
+        ->paginate();
         return response()->json($query);
     }
 
@@ -42,7 +42,7 @@ class CrecheController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Creche $creche)
+    public function show(Beneficiary $beneficiary)
     {
         //
     }
@@ -50,7 +50,7 @@ class CrecheController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Creche $creche)
+    public function edit(Beneficiary $beneficiary)
     {
         //
     }
@@ -58,7 +58,7 @@ class CrecheController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Creche $creche)
+    public function update(Request $request, Beneficiary $beneficiary)
     {
         //
     }
@@ -66,7 +66,7 @@ class CrecheController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Creche $creche)
+    public function destroy(Beneficiary $beneficiary)
     {
         //
     }

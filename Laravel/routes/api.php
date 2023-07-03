@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BeneficiaryController;
+use App\Http\Controllers\CrecheController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RequestsController;
@@ -51,7 +53,8 @@ Route::middleware('cors')->group(function () {
         Route::get('request', [RequestsController::class, 'index']);
         Route::get('quote', [QuoteController::class, 'index']);
     });
-    
+    Route::get('creche', [CrecheController::class, 'index']);
+    Route::get('beneficiary', [BeneficiaryController::class, 'index']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
