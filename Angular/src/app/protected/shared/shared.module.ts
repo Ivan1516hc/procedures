@@ -7,6 +7,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { RequestsComponent } from './layouts/requests/requests.component';
 import { QuotesComponent } from './layouts/quotes/quotes.component';
 import { BeneficiariesComponent } from './layouts/beneficiaries/beneficiaries.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { BeneficiariesComponent } from './layouts/beneficiaries/beneficiaries.co
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule, 
+    FormsModule,
   ],
   exports: [SidebarComponent, HeaderComponent, FooterComponent, RequestsComponent, QuotesComponent, BeneficiariesComponent]
 })

@@ -19,6 +19,10 @@ export class RequestsComponent {
     this.initTable();
   }
 
+  recargarDatosTabla() {
+    this.initTable();
+  }
+
   private initTable(){
     this.allService.indexRequest().subscribe({next:(request)=>{
         this.request=request;

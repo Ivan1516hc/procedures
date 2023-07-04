@@ -26,7 +26,8 @@ return new class extends Migration
             $table->unsignedTinyInteger('center_id');
             $table->foreign('center_id')->references('id')->on('centers');
 
-            $table->tinyInteger('status')->default(1);
+            $table->unsignedTinyInteger('status_request_id')->default(1);
+            $table->foreign('status_request_id')->references('id')->on('status_requests');
 
             $table->timestamps();
             $table->softDeletes();

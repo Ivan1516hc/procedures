@@ -10,7 +10,7 @@
          </nav>
       </div>
       <section class="section dashboard">
-         <app-requests [data]="data" [headers]="header"></app-requests>
+         <app-requests [data]="data" [headers]="header" (citaCreada)="recargarDatosTabla()"></app-requests>
       </section>
    </main>
 </app-creche>

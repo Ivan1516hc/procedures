@@ -25,6 +25,7 @@ use App\Models\Requests;
 use App\Models\RequiredDocument;
 use App\Models\Role;
 use App\Models\Room;
+use App\Models\StatusRequest;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -43,6 +44,18 @@ class DatabaseSeeder extends Seeder
         ]);
         Priority::factory()->create([
             'name'                  => 'ALTA'
+        ]);
+        StatusRequest::create([
+            'name'  => 'SIN TERMINAR'
+        ]);
+        StatusRequest::create([
+            'name'  => 'EN PROCESO'
+        ]);
+        StatusRequest::create([
+            'name'  => 'ACEPTADO'
+        ]);
+        StatusRequest::create([
+            'name'  => 'RECHAZADO'
         ]);
         // Priority::factory(3)->create();
         Center::factory(10)->create();

@@ -18,7 +18,7 @@ class RequestsController extends Controller
         //     return;
         // }
         $model = Requests::query();
-        $model->where('procedure_id', $user->department_id)->where('status','<>',0);
+        $model->where('procedure_id', $user->department_id)->where('status_request_id','<>',1);
         ($user->department_id == 2 ? $model->with('crecheRequest.creche.degree') : null);
         // ($user->department_id == 3 ? $model->with('centro.sala') : null);
         // ($user->department_id == 4 ? $model->with('centro.sala') : null);
@@ -30,7 +30,7 @@ class RequestsController extends Controller
 
         $query = $model->has('beneficiaries')->orderBy('id','asc')->with(['beneficiaries' => function ($query) {
             $query->orderBy('edad', 'asc');
-        }])->with('priority')->paginate();
+        }])->with('priority')->withCount('quotes')->paginate();
         return response()->json($query);
     }
 
@@ -69,9 +69,15 @@ class RequestsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Requests $requests)
+    public function update(Request $request)
     {
-        //
+        $query= Requests::find($request->id);
+        $query->update([
+            'status_request_id' => $request->status_request_id
+        ]);
+        $response['status']=200;
+        $response['message']="Actualizacion exitosa";
+        return response()->json($response);
     }
 
     /**

@@ -51,7 +51,11 @@ Route::middleware('cors')->group(function () {
     Route::middleware('jwt.verify')->group(function () {
         //Requests
         Route::get('request', [RequestsController::class, 'index']);
+        Route::put('request/update',[RequestsController::class,'update']);
+
         Route::get('quote', [QuoteController::class, 'index']);
+        Route::post('quote/create',[QuoteController::class,'store']);
+        
         Route::get('creche', [CrecheController::class, 'index']);
         Route::get('beneficiary', [BeneficiaryController::class, 'index']);
     });

@@ -20,9 +20,9 @@ class CrecheController extends Controller
         ->withCount(['beneficiryCreche as beneficiry_count' => function ($query){
             return $query->where('status',1);
         },'requests as process' => function ($query){
-            return $query->where('status',1);
+            return $query->where('status_request_id',2);
         },'requests as refused' => function ($query){
-            return $query->where('status',0);
+            return $query->where('status_request_id',4);
         }])->with('degree','room')->paginate();
         return response()->json($query);
     }

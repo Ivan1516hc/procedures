@@ -9,7 +9,7 @@ class Requests extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'user_id','procedure_id','status','priority_id','center_id'
+       'user_id','procedure_id','status_request_id','priority_id','center_id'
     ];
 
     protected $casts = [

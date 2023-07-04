@@ -14,19 +14,64 @@
                <td>{{item.beneficiaries[0].edad}} AÑOS</td>
                <td>{{item.beneficiaries[1]?.nombre ?? null}} {{item.beneficiaries[1]?.apaterno ?? null}}</td>
                <td>
-                  <div class="text-center" [ngClass]="item.priority_id === 3 ? 'alert-danger' : item.priority_id === 2 ? 'alert-warning' : 'alert-success'">
+                  <div class="text-center"
+                     [ngClass]="item.priority_id === 3 ? 'alert-danger' : item.priority_id === 2 ? 'alert-warning' : 'alert-success'">
                      {{item.priority.name}}
                   </div>
-                </td>
+               </td>
                <td>{{item.creche_request[0]?.creche?.degree?.name ?? null}}</td>
                <td>{{item.created_at ?? null}}</td>
-               <td>{{item.status == 1 ? 'En proceso' : (item.status == 2 ? 'Aceptado' : (item.status == 3 ? 'Rechazado' : null))}}</td>
-               <td *ngIf="item.status == 0"><button class=" btn btn-sm btn-success m-1">Aceptar</button></td>
-               <td *ngIf="item.status == 0"><button class=" btn btn-sm btn-danger m-1">Rechazar</button></td>
-               <td *ngIf="item.status == 1"><button class=" btn btn-sm btn-secondary m-1">Reactivar</button></td>
+               <td>
+                  <div class="text-center"
+                     [ngClass]="item.status_request_id === 4 ? 'alert-danger' : item.status_request_id === 2 ? 'alert-warning' : 'alert-success'">
+                     {{item.status_request_id == 2 ? 'En proceso' : (item.status_request_id == 3 ? 'Aceptado' :
+                     (item.status_request_id == 4 ? 'Rechazado'
+                     : null))}}</div>
+               </td>
+               <td  *ngIf="item.quotes_count != 0 && item.status_request_id == 3">
+                  <div>Cita Agendada</div>
+               </td>
+               <td *ngIf="item.quotes_count == 0 && item.status_request_id == 3"><button
+                     class=" btn btn-sm btn-success m-1" data-bs-toggle="modal" data-bs-target="#quoteModal"
+                     (click)="getRequest(item)">Agendar Cita</button></td>
+               <td *ngIf="item.status_request_id != 3 && item.status_request_id != 4"><button
+                     class=" btn btn-sm btn-success m-1">Aceptar</button></td>
+               <td *ngIf="item.status_request_id == 2"><button class=" btn btn-sm btn-danger m-1">Rechazar</button></td>
+               <td *ngIf="item.status_request_id == 4"><button class=" btn btn-sm btn-secondary m-1">Reactivar</button>
+               </td>
                <td><button class=" btn btn-sm btn-info">Ver</button></td>
             </tr>
          </tbody>
       </table>
+   </div>
+</div>
+
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="quoteModalLabel">Agendar Cita para {{id?.beneficiaries[0]?.nombre ?? null}}
+               {{id?.beneficiaries[0]?.apaterno ?? null}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <form class="form" [formGroup]="miFormulario">
+               <div class="mb-3">
+                  <label for="dateInput" class="form-label">Fecha</label>
+                  <input type="date" class="form-control" id="dateInput" placeholder="Ingrese la fecha"
+                     formControlName="date">
+               </div>
+               <div class="mb-3">
+                  <label for="timeInput" class="form-label">Hora</label>
+                  <input type="time" class="form-control" id="timeInput" placeholder="Ingrese la hora"
+                     formControlName="hour">
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" id="cancel" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success" (click)="schedule()">Agendar</button>
+         </div>
+      </div>
    </div>
 </div>

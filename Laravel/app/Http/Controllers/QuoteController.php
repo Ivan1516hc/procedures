@@ -29,13 +29,12 @@ class QuoteController extends Controller
         // }) : null);
 
         $query = $model
-        ->has('request.beneficiaries')->orderBy('date','asc')->orderBy('hour','asc')
-        ->with(['request.crecheRequest.creche.degree','request.priority','request.beneficiaries' => function ($query) {
-            $query->orderBy('edad', 'asc');
-        }])->whereHas('request', function ($query) use ($user) {
-            $query->where('procedure_id', $user->department_id);
-        })->paginate();
-        // ->with('request')->paginate();
+            ->has('request.beneficiaries')->orderBy('date', 'asc')->orderBy('hour', 'asc')
+            ->with(['request.crecheRequest.creche.degree', 'request.priority', 'request.beneficiaries' => function ($query) {
+                $query->orderBy('edad', 'asc');
+            }])->whereHas('request', function ($query) use ($user) {
+                $query->where('procedure_id', $user->department_id);
+            })->paginate();
         return response()->json($query);
     }
 
@@ -52,7 +51,25 @@ class QuoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        if($user->role_id == 1){
+            return;
+        }
+
+        $body = $request->all();
+        $quote = Quote::where('request_id', $request->request_id)->get();
+
+        if ($quote->isEmpty()) {
+            Quote::create($body);
+            $response['message'] = "Cita registrada correctamente";
+            $response['code'] = 200;
+        } else {
+            $response['message'] = "Ya existe una Cita para esta Solicitud";
+            $response['code'] = 202;
+        }
+
+        return response()->json($response);
     }
 
     /**

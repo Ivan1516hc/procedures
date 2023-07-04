@@ -6,6 +6,7 @@ use App\Models\Center;
 use App\Models\Priority;
 use App\Models\Procedure;
 use App\Models\Requests;
+use App\Models\StatusRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -27,7 +28,7 @@ class RequestsFactory extends Factory
             'procedure_id' => Procedure::all()->random()->id,
             'priority_id' => Priority::all()->random()->id,
             'center_id' => Center::all()->random()->id,
-            'status' => $this->faker->randomElement([0,1,2]),
+            'status_request_id' => StatusRequest::all()->random()->id,
         ];
     }
 }
