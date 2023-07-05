@@ -19,7 +19,7 @@
                      {{item.priority.name}}
                   </div>
                </td>
-               <td>{{item.creche_request[0]?.creche?.degree?.name ?? null}}</td>
+               <td>{{item.creche_request[0]?.degree?.name ?? null}}</td>
                <td>{{item.created_at ?? null}}</td>
                <td>
                   <div class="text-center"
@@ -28,16 +28,19 @@
                      (item.status_request_id == 4 ? 'Rechazado'
                      : null))}}</div>
                </td>
-               <td  *ngIf="item.quotes_count != 0 && item.status_request_id == 3">
+               <td *ngIf="item.quotes_count != 0 && item.status_request_id == 3">
                   <div>Cita Agendada</div>
                </td>
                <td *ngIf="item.quotes_count == 0 && item.status_request_id == 3"><button
                      class=" btn btn-sm btn-success m-1" data-bs-toggle="modal" data-bs-target="#quoteModal"
                      (click)="getRequest(item)">Agendar Cita</button></td>
                <td *ngIf="item.status_request_id != 3 && item.status_request_id != 4"><button
-                     class=" btn btn-sm btn-success m-1">Aceptar</button></td>
-               <td *ngIf="item.status_request_id == 2"><button class=" btn btn-sm btn-danger m-1">Rechazar</button></td>
-               <td *ngIf="item.status_request_id == 4"><button class=" btn btn-sm btn-secondary m-1">Reactivar</button>
+                     class="btn btn-sm btn-success m-1"
+                     (click)="changeStatus({ id : item.id,status_request_id: 3 })">Aceptar</button></td>
+               <td *ngIf="item.status_request_id == 2"><button class="btn btn-sm btn-danger m-1"
+                     (click)="changeStatus({ id : item.id,status_request_id: 4 })">Rechazar</button></td>
+               <td *ngIf="item.status_request_id == 4"><button class="btn btn-sm btn-secondary m-1"
+                     (click)="changeStatus({ id : item.id,status_request_id: 2 })">Reactivar</button>
                </td>
                <td><button class=" btn btn-sm btn-info">Ver</button></td>
             </tr>

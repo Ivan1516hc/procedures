@@ -17,6 +17,10 @@ export class QuotesComponent {
     this.initTable();
   }
 
+  recargarDatosTabla() {
+    this.initTable();
+  }
+
   private initTable(){
     this.allService.indexQuote().subscribe({next:(quotes)=>{
         this.quotes=quotes;

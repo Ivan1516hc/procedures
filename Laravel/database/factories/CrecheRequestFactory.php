@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Creche;
+use App\Models\Degree;
 use App\Models\Requests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,8 @@ class CrecheRequestFactory extends Factory
     {
         return [
             'creche_id' => Creche::all()->random()->id,
-            'request_id' => Requests::all()->random()->id
+            'request_id' => Requests::all()->random()->id,
+            'degree_id' => Degree::all()->random()->id
         ];
     }
 }

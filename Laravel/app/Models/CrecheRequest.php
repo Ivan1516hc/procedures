@@ -9,7 +9,7 @@ class CrecheRequest extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'creche_id','request_id'
+        'creche_id','request_id', 'degree_id'
     ];
 
     protected $casts = [
@@ -25,6 +25,11 @@ class CrecheRequest extends Model
     public function request()
     {
         return $this->hasOne('App\Models\Requests', 'id', 'request_id');
+    }
+
+    public function degree()
+    {
+        return $this->hasOne('App\Models\Degree', 'id', 'degree_id');
     }
 
     public function setAttribute($key, $value)

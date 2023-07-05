@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('creche_requests', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedSmallInteger('creche_id');
+            $table->unsignedSmallInteger('creche_id')->nullable();
             $table->foreign('creche_id')->references('id')->on('creches');
 
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('requests');
+
+            $table->unsignedTinyInteger('degree_id');
+            $table->foreign('degree_id')->references('id')->on('degrees');
 
             $table->timestamps();
             $table->softDeletes();

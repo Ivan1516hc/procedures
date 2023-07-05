@@ -15,4 +15,9 @@ export class CrecheService {
     const url = `${this.baseUrl}/creche`;
     return this.http.get<any>(url);
   }
+
+  requestCreche(degree:number): Observable<any> {
+    const url = `${this.baseUrl}/creche/request/`+ degree;
+    return this.http.get<any>(url);
+  }
 }

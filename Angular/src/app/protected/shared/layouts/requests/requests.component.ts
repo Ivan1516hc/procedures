@@ -30,12 +30,21 @@ export class RequestsComponent implements OnInit {
 
   }
 
+  changeStatus(data: any) {
+    this.allService.updateRequest(data).subscribe(response => {
+      if (response.code == 200) {
+        this.citaCreada.emit();
+      } else {
+        // Swal.fire("Error", "error")
+      }
+    })
+  }
+
   schedule() {
     if (this.miFormulario.invalid) {
       return this.miFormulario.markAllAsTouched();
     }
     const data = this.miFormulario.value;
-    console.log(data);
     this.allService.createQuote(data).subscribe(response => {
       if (response.code == 200) {
         this.citaCreada.emit();

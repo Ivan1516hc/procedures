@@ -17,14 +17,25 @@ export class AllService {
     return this.http.get<Requests>(url);
   }
 
+  createRequest(data:any){
+    const url =`${this.baseUrl}/request/create`;
+    const body=JSON.stringify(data);
+     return this.http.post<any>(url,body)
+  }
+
   updateRequest(data:any){
-    const url=`${this.baseUrl}/point/update`
+    const url=`${this.baseUrl}/request/update`
     return this.http.put<any>(url,data);
   }
 
   indexQuote(): Observable<any> {
     const url = `${this.baseUrl}/quote`;
     return this.http.get<any>(url);
+  }
+
+  updateQuote(data:any){
+    const url=`${this.baseUrl}/quote/update`
+    return this.http.put<any>(url,data);
   }
 
   createQuote(data:any){

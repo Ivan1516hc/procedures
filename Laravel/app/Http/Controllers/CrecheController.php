@@ -30,6 +30,21 @@ class CrecheController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function showCreche($degree)
+    {
+        $user = Auth::user();
+        $model = Creche::query();
+        $query = $model
+        ->orderBy('room_id','asc')->where('center_id',$user->center_id)->where('degree_id',$degree)
+        ->withCount(['beneficiryCreche as beneficiry_count' => function ($query){
+            return $query->where('status',1);
+        }])->with(['degree','room'])->get();
+        return response()->json($query);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         //

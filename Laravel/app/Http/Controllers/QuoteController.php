@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class QuoteController extends Controller
 {
@@ -14,9 +15,9 @@ class QuoteController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // if($user->role_id == 1){
-        //     return;
-        // }
+        if($user->role_id == 1){
+            return;
+        }
         $model = Quote::query();
         // $model->where('procedure_id', $user->department_id)->where('status','<>',0);
         // ($user->department_id == 2 ? $model->with('centro.sala') : null);
@@ -29,8 +30,16 @@ class QuoteController extends Controller
         // }) : null);
 
         $query = $model
-            ->has('request.beneficiaries')->orderBy('date', 'asc')->orderBy('hour', 'asc')
-            ->with(['request.crecheRequest.creche.degree', 'request.priority', 'request.beneficiaries' => function ($query) {
+            ->has('request.beneficiaries')->orderBy('date', 'asc')->orderBy('hour', 'asc')->withCount([
+                'request as beneficiaries_count' => function ($query) {
+                    $query->select(DB::raw('count(*)'))
+                        ->join('beneficiary_requests', 'requests.id', '=', 'beneficiary_requests.request_id')
+                        ->join('beneficiaries','beneficiaries.id','=','beneficiary_requests.beneficiary_id')
+                        ->join('beneficiary_creches','beneficiaries.id','=','beneficiary_creches.beneficiary_id')
+                        ->where('beneficiary_creches.status',1);
+                }
+            ])
+            ->with(['request.crecheRequest.degree', 'request.priority', 'request.beneficiaries' => function ($query) {
                 $query->orderBy('edad', 'asc');
             }])->whereHas('request', function ($query) use ($user) {
                 $query->where('procedure_id', $user->department_id);
@@ -53,7 +62,7 @@ class QuoteController extends Controller
     {
         $user = Auth::user();
 
-        if($user->role_id == 1){
+        if ($user->role_id == 1) {
             return;
         }
 
@@ -91,9 +100,15 @@ class QuoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Quote $quote)
+    public function update(Request $request)
     {
-        //
+        $query = Quote::find($request->id);
+        $query->update([
+            'attended' => $request->attended
+        ]);
+        $response['code'] = 200;
+        $response['message'] = "Actualizacion exitosa";
+        return response()->json($response);
     }
 
     /**

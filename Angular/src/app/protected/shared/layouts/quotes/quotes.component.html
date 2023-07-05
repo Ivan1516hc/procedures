@@ -10,20 +10,69 @@
          <tbody>
             <tr *ngFor="let item of data">
                <th scope="row">{{item.id}}</th>
-               <td>{{item?.request?.beneficiaries[0]?.nombre ?? null}} {{item?.request?.beneficiaries[0]?.apaterno ?? null}}</td>
+               <td>{{item?.request?.beneficiaries[0]?.nombre ?? null}} {{item?.request?.beneficiaries[0]?.apaterno ??
+                  null}}</td>
                <td>
-                  <div class="text-center" [ngClass]="item.request?.priority_id === 3 ? 'alert-danger' : item.request?.priority_id === 2 ? 'alert-warning' : 'alert-success'">
+                  <div class="text-center"
+                     [ngClass]="item.request?.priority_id === 3 ? 'alert-danger' : item.request?.priority_id === 2 ? 'alert-warning' : 'alert-success'">
                      {{item.request?.priority.name}}
                   </div>
-                </td>
-               <td>{{item.request?.creche_request[0]?.creche?.degree?.name}}</td>
+               </td>
+               <td>{{item.request?.creche_request[0]?.degree?.name}}</td>
                <td>{{item.date ?? null}}</td>
                <td>{{item.hour ?? null}}</td>
-               <td><button class=" btn btn-sm btn-success">Asistio</button></td>
-               <td><button class=" btn btn-sm btn-danger m-1">No asistio</button></td>
-               <td><button class=" btn btn-sm btn-info">Ver Datos</button></td>
+               <td>
+                  <div *ngIf="item.attended == 2" class="text-center alert-success">Asistio</div>
+                  <div *ngIf="item.attended == 0" class="text-center alert-danger">No asistio</div>
+                  <div *ngIf="item.attended == 1" class="text-center alert-primary">Pendiente</div>
+                  <div *ngIf="item.beneficiaries_count > 0" class="text-center alert-success">Ya es Beneficiario</div>
+               </td>
+               <td>
+                  <button *ngIf="item.attended == 1" class="btn btn-sm btn-success"
+                     (click)="changeStatus({ id : item.id,attended: 2 })">Asistio</button>
+                  <button *ngIf="item.attended == 1" class="btn btn-sm btn-danger m-1"
+                     (click)="changeStatus({ id : item.id,attended: 0 })">No asistio</button>
+                  <button *ngIf="item.beneficiaries_count == 0 && item.attended == 2" class="btn btn-sm btn-primary m-1"
+                     data-bs-toggle="modal" data-bs-target="#crecheModal"
+                     (click)="getCreches(item?.request?.center_id,item?.request?.creche_request?.id)">Seleccionar
+                     Sala</button>
+                  <button class=" btn btn-sm btn-info">Ver Datos</button>
+               </td>
             </tr>
          </tbody>
       </table>
+   </div>
+</div>
+
+<div class="modal fade" id="crecheModal" tabindex="-1" aria-labelledby="crecheModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="crecheModalLabel">Agendar Cita para</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <form class="form">
+               <!-- <div class="mb-3">
+                  <label for="dateInput" class="form-label">Fecha</label>
+                  <input type="date" class="form-control" id="dateInput" placeholder="Ingrese la fecha"
+                     formControlName="date">
+
+                  <label>MODALIDAD: *</label>
+                  <select class="form-control" formControlName="modality_id">
+                     <option *ngFor="let item of creches" value={{item.id}}>{{item.name}}</option>
+                  </select>
+                  <span class="form-text text-danger form"
+                     *ngIf="miFormulario.controls['modality_id'].errors && miFormulario.controls['modality_id'].touched">
+                     DEBE DE SELECCIONAR UNA OPCIÓN
+                  </span>
+               </div> -->
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" id="cancel" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success">Agendar</button>
+         </div>
+      </div>
    </div>
 </div>
