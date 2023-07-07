@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beneficiary;
 use App\Models\Creche;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class CrecheController extends Controller
         $model = Creche::query();
         $query = $model
         ->orderBy('degree_id','asc')->where('center_id',$user->center_id)
-        ->withCount(['beneficiryCreche as beneficiry_count' => function ($query){
+        ->withCount(['beneficiaryCreche as beneficiry_count' => function ($query){
             return $query->where('status',1);
         },'requests as process' => function ($query){
             return $query->where('status_request_id',2);
@@ -30,15 +31,23 @@ class CrecheController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function showCreche($degree)
+    public function showCreche($center,$degree)
     {
-        $user = Auth::user();
         $model = Creche::query();
         $query = $model
-        ->orderBy('room_id','asc')->where('center_id',$user->center_id)->where('degree_id',$degree)
-        ->withCount(['beneficiryCreche as beneficiry_count' => function ($query){
+        ->orderBy('room_id','asc')->where('center_id',$center)->where('degree_id',$degree)
+        ->withCount(['beneficiaryCreche as beneficiry_count' => function ($query){
             return $query->where('status',1);
         }])->with(['degree','room'])->get();
+        return response()->json($query);
+    }
+
+    public function showBeneficiaryCreche($creche)
+    {
+        $model = Beneficiary::query();
+        $query = $model->has('beneficiaryCreche')->whereHas('beneficiaryCreche', function($query) use($creche){
+            $query->where('creche_id',$creche)->where('status',1);
+        })->with('beneficiaryCreche')->get();
         return response()->json($query);
     }
 

@@ -9,6 +9,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { QuotesComponent } from './quotes/quotes.component';
 import { BeneficiariesComponent } from './beneficiaries/beneficiaries.component';
 import { CareCenterComponent } from './care-center/care-center.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CareCenterComponent } from './care-center/care-center.component';
   imports: [
     CommonModule,
     CrecheRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
   ]
 })
 export class CrecheModule { }

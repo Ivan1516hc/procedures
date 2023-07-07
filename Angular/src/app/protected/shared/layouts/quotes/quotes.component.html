@@ -34,7 +34,7 @@
                      (click)="changeStatus({ id : item.id,attended: 0 })">No asistio</button>
                   <button *ngIf="item.beneficiaries_count == 0 && item.attended == 2" class="btn btn-sm btn-primary m-1"
                      data-bs-toggle="modal" data-bs-target="#crecheModal"
-                     (click)="getCreches(item?.request?.center_id,item?.request?.creche_request?.id)">Seleccionar
+                     (click)="getCreches({id: item?.id,request_id: item?.request?.id,center_id : item?.request?.center_id, degree_id : item?.request?.creche_request[0]?.degree_id, beneficiary: item?.request?.beneficiaries[0], pivote_id : item?.request?.creche_request[0]?.id})">Seleccionar
                      Sala</button>
                   <button class=" btn btn-sm btn-info">Ver Datos</button>
                </td>
@@ -48,30 +48,26 @@
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="crecheModalLabel">Agendar Cita para</h5>
+            <h5 class="modal-title" id="crecheModalLabel">Ingresar el beneficiario {{beneficiary?.nombre}}
+               {{beneficiary?.apaterno}}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
-            <form class="form">
-               <!-- <div class="mb-3">
-                  <label for="dateInput" class="form-label">Fecha</label>
-                  <input type="date" class="form-control" id="dateInput" placeholder="Ingrese la fecha"
-                     formControlName="date">
-
-                  <label>MODALIDAD: *</label>
-                  <select class="form-control" formControlName="modality_id">
-                     <option *ngFor="let item of creches" value={{item.id}}>{{item.name}}</option>
+            <form class="form" [formGroup]="miFormulario">
+               <div class="mb-3">
+                  <label>Guarderias:</label>
+                  <select class="form-control" formControlName="creche_id">
+                     <option value='0' selected>--Seleccionar Guarderia--</option>
+                     <option *ngFor="let item of creches" [value]="item?.id+','+item?.beneficiry_count">
+                        {{item?.room?.name}} - CUPO:
+                        {{item?.capacity - item?.beneficiry_count}}</option>
                   </select>
-                  <span class="form-text text-danger form"
-                     *ngIf="miFormulario.controls['modality_id'].errors && miFormulario.controls['modality_id'].touched">
-                     DEBE DE SELECCIONAR UNA OPCIÓN
-                  </span>
-               </div> -->
+               </div>
             </form>
          </div>
          <div class="modal-footer">
             <button type="button" id="cancel" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-success">Agendar</button>
+            <button type="button" class="btn btn-success" (click)="assignCreche()">Asignar Guarderia</button>
          </div>
       </div>
    </div>

@@ -37,7 +37,9 @@
                                     </div>
                                 </td>
                                 <td>{{item.capacity - item.beneficiry_count ?? null}}</td>
-                                <td><button class=" btn btn-sm btn-info">Ver Datos</button></td>
+                                <td><button *ngIf="item?.beneficiry_count >0" class="btn btn-sm btn-success"
+                                        data-bs-toggle="modal" data-bs-target="#beneficiariosModal"
+                                        (click)="getBeneficiaries(item.id)">Ver</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -46,3 +48,84 @@
         </section>
     </main>
 </app-creche>
+
+<!--Modal: modalPush-->
+<div class="modal fade" id="beneficiariosModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-info modal-lg" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading text-primary">BENEFICIARIOS DE SALA</p>
+            </div>
+            <!--Body-->
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 mt-3" id="table-container-beneficiario">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="thead">
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Fecha Nacimiento</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of beneficiaries">
+                                        <th scope="row">{{item.id}}</th>
+                                        <td>{{item?.nombre ?? null}}
+                                            {{item?.apaterno ??
+                                            null}}</td>
+                                        <td>{{item?.fechanacimiento ?? null}}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary m-1" data-bs-toggle="modal"
+                                                data-bs-target="#crecheModal" (click)="setBeneficiary(item)">Cambiar
+                                                Sala</button>
+                                            <button class="btn btn-sm btn-danger m-1"
+                                                (click)="changeStatusBeneficiary(0,item?.beneficiary_creche[0].id)">Dar De Baja</button>
+                                            <button class=" btn btn-sm btn-info m-1">Ver Datos</button>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer flex-center align-self-center">
+                    <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+</div>
+<!--Modal: modalPush-->
+
+<div class="modal fade" id="crecheModal" tabindex="-1" aria-labelledby="crecheModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="crecheModalLabel">Ingresar el beneficiario {{beneficiary?.nombre}}
+                {{beneficiary?.apaterno}}</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+             <form class="form" [formGroup]="miFormulario">
+                <div class="mb-3">
+                   <label>Guarderias:</label>
+                   <select class="form-control" formControlName="creche_id">
+                      <option value='0'>--Seleccionar Guarderia--</option>
+                      <option *ngFor="let item of data" [value]="item?.id+','+item?.beneficiry_count">
+                         {{item?.room?.name}} - CUPO:
+                         {{item?.capacity - item?.beneficiry_count}}</option>
+                   </select>
+                </div>
+             </form>
+          </div>
+          <div class="modal-footer">
+             <button type="button" id="cancel" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+             <button type="button" class="btn btn-success" (click)="changeCreche()">Asignar Guarderia</button>
+          </div>
+       </div>
+    </div>
+ </div>

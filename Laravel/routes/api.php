@@ -59,8 +59,12 @@ Route::middleware('cors')->group(function () {
         Route::put('quote/update',[QuoteController::class,'update']);
         
         Route::get('creche', [CrecheController::class, 'index']);
-        Route::get('creche/request/{degree}',[CrecheController::class,'showCreche']);
+        Route::get('creche/request/{center}/{degree}',[CrecheController::class,'showCreche']);
+        Route::get('creche/beneficiaries/{creche}',[CrecheController::class,'showBeneficiaryCreche']);
 
+        Route::post('creche/beneficiary/create',[BeneficiaryController::class,'beneficiaryCreche']);
+        Route::put('creche/beneficiary/update',[BeneficiaryController::class,'updateBeneficiaryCreche']);
+        
         Route::get('beneficiary', [BeneficiaryController::class, 'index']);
     });
 });

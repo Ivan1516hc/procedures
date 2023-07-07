@@ -37,7 +37,7 @@ class Creche extends Model
         return $this->hasOne('App\Models\Procedure', 'id', 'procedure_id');
     }
 
-    public function beneficiryCreche()
+    public function beneficiaryCreche()
     {
         return $this->hasMany('App\Models\BeneficiaryCreche', 'creche_id', 'id');
     }

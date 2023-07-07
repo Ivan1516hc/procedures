@@ -11,7 +11,7 @@ export class RequestsComponent {
   request: Requests;
   hayError: boolean=false;
   data: RequestsResponse[];
-  header=['Id','Beneficiario','Edad','Tutor','Prioridad','Grado','Fecha'];
+  header=['Id','Beneficiario','Edad','Tutor','Prioridad','Grado','Fecha','Estado'];
 
   constructor(private allService:AllService){}
 
