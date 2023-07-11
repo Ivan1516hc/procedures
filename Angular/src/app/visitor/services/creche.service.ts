@@ -9,11 +9,17 @@ import { environment } from 'src/environments/environment';
 })
 export class CrecheService {
   private baseUrl: string = environment.baseUrl;
+  private baseUrlDataC: string = 'http://datac.difzapopan.gob.mx/api-servicios/public/api';
 
   constructor(private http: HttpClient) { }
 
   getCatalogs(): Observable<any> {
-    const url = 'http://datac.difzapopan.gob.mx/api-servicios/public/api/data/catalogos';
+    const url = this.baseUrlDataC+'/data/catalogos';
+    return this.http.get<any>(url);
+  }
+
+  getPostalCodeInfo(value:number){
+    const url = this.baseUrlDataC+'/data/colonias/' + value;
     return this.http.get<any>(url);
   }
 
@@ -21,7 +27,7 @@ export class CrecheService {
     const value = curp;
     let Age = 0;
 
-    return this.http.get<any>('http://datac.difzapopan.gob.mx/api-servicios/public/api/1111112022/get/curp/' + value)
+    return this.http.get<any>(this.baseUrlDataC+'/1111112022/get/curp/' + value)
       .pipe(
         switchMap(response => {
           if (Array.isArray(response) && response.length > 0 && response[0] === 'ok') {
@@ -40,7 +46,7 @@ export class CrecheService {
               });
             }
           } else {
-            return this.http.get<any>('http://datac.difzapopan.gob.mx/api-servicios/public/api/1111112022/validarCurp/' + value)
+            return this.http.get<any>(this.baseUrlDataC+'/1111112022/validarCurp/' + value)
               .pipe(
                 map(newResponse => {
                   if (newResponse[1] !== 'NO EXITOSO') {
@@ -52,7 +58,8 @@ export class CrecheService {
                       curp: newResponse[0],
                       nombre: newResponse[1],
                       fechanacimiento: date,
-                      edad: Age
+                      edad: Age,
+                      sexo:newResponse[4] == "H" ? 1 : 2,
                     };
                   } else {
                     throw new Error('No se encontró una respuesta EXITOSA');
@@ -65,7 +72,7 @@ export class CrecheService {
   }
 
   fetchColonias(value: any): Observable<any> {
-    const url = 'http://datac.difzapopan.gob.mx/api-servicios/public/api/data/colonias/' + value;
+    const url = this.baseUrlDataC+'/data/colonias/' + value;
     return this.http.get<any>(url);
   }
 

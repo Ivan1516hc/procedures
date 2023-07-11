@@ -16,105 +16,148 @@
                         <div class="card-body">
                             <h5 class="card-title">Formulario de Infante</h5>
                             <form class="row g-3" [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
-                                <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Curp</label>
-                                    <input type="text" class="form-control">
+                                <div class="col-10 col-md-6 col-lg-6"> <label class="form-label">Curp</label>
+                                    <input type="text" class="form-control" formControlName="curp">
                                 </div>
-                                <hr>
-                                <h5>Datos Generales</h5>
-                                <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Nombre</label> <input
-                                        type="email" class="form-control"></div>
-                                <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Apellido
-                                        Paterno</label>
-                                    <input type="password" class="form-control">
+                                <div class="col-12 col-md-6 col-lg-6 align-self-end" *ngIf="curp != true">
+                                    <button class="btn btn-md btn-success mt-1" (click)="validatorCurp()">Validar
+                                        Curp</button>
                                 </div>
-                                <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Apellido
-                                        Materno</label>
-                                    <input type="password" class="form-control">
+                                <div class="col-2 col-md-6 col-lg-6 align-self-end" *ngIf="curp == true">
+                                    <button class="btn btn-md btn-success mt-1"> <i
+                                            class="bi bi-check-circle"></i></button>
                                 </div>
-                                <div class="col-12 col-md-6 col-lg-2"> <label class="form-label">Fecha de
-                                        Nacimiento</label>
-                                    <input type="date" class="form-control" placeholder="Ejemplo de formato 2022-11-04">
-                                </div>
-                                <div class="col-6 col-md-6 col-lg-2">
-                                    <label class="form-label">Sexo</label>
-                                    <select class="form-control">
-                                        <option value="">--Seleccionar--</option>
-                                        <option value="1">Hombre</option>
-                                        <option value="2">Mujer</option>
-                                    </select>
-                                </div>
-                                <div class="col-6 col-md-6 col-lg-2"> <label class="form-label">Tipo de Sangre</label>
-                                    <select class="form-control">
-                                        <option value="">--Seleccionar--</option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                    </select>
-                                </div>
-                                <hr>
-                                <h5>Datos de Direccion</h5>
-                                <div class="col-md-6"> <label class="form-label">Numero Exterior</label>
-                                    <input type="number" class="form-control">
-                                </div>
-                                <div class="col-md-6"> <label class="form-label">Numero Interior</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-6"> <label class="form-label">Primer Cruce</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-6"> <label class="form-label">Segundo Cruce</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-6"> <label class="form-label">Codigo Postal</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Municipio</label>
-                                    <select class="form-control">
-                                        <option value="">Seleccionar</option>
-                                        <option value="Zapopan">Zapopan</option>
-                                        <option value="Guadalajara">Guadalajara</option>
-                                        <option value="San Pedro Tlaquepaque">San Pedro Tlaquepaque</option>
-                                        <option value="Tonala">Tonala</option>
-                                        <option value="Tlajomulco de Zuñiga">Tlajomulco de Zuñiga</option>
-                                        <option value="Zapotlanejo">Zapotlanejo</option>
-                                        <option value="El Salto">El Salto</option>
-                                        <option value="Acatlan de Juarez">Acatlan de Juarez</option>
-                                        <option value="El Arenal">El Arenal</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6"> <label class="form-label">Colonia</label> <input type="text"
-                                        class="form-control"></div>
-                                <div class="col-md-2"> <label class="form-label">Celular</label> <input type="text"
-                                        class="form-control"></div>
-                                <hr>
-                                <h5>Datos CDI</h5>
-                                <div>
+                                <div *ngIf="curp == true" class="row">
+                                    <hr class="mt-1">
+                                    <h5>Datos Generales</h5>
+                                    <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Nombre</label>
+                                        <input type="email" class="form-control" formControlName="nombre">
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Apellido
+                                            Paterno</label>
+                                        <input class="form-control" formControlName="apaterno">
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Apellido
+                                            Materno</label>
+                                        <input class="form-control" formControlName="amaterno">
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-2"> <label class="form-label">Fecha de
+                                            Nacimiento</label>
+                                        <input type="date" class="form-control"
+                                            placeholder="Ejemplo de formato 2022-11-04"
+                                            formControlName="fechanacimiento">
+                                    </div>
+                                    <div class="col-6 col-md-6 col-lg-2">
+                                        <label class="form-label">Sexo</label>
+                                        <select class="form-control" formControlName="sexo">
+                                            <option value="">-Seleccionar-</option>
+                                            <option value="1">Hombre</option>
+                                            <option value="2">Mujer</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6 col-md-6 col-lg-2"> <label class="form-label">Tipo de
+                                            Sangre</label>
+                                        <select class="form-control" formControlName="tipo_sangre">
+                                            <option value="">-Seleccionar-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                        </select>
+                                    </div>
+                                    <hr class="mt-1">
+                                    <h5>Datos de Direccion</h5>
 
-                                </div>
-                                <div>
-                                    <ng-container formArrayName="hermanos_en_CDI">
-                                        <div *ngFor="let hermanos_en_CDI of hermanos_en_CDI.controls; let i =index"
-                                            [formGroupName]="i">
-                                            <div class="col-md-6"> <label class="form-label">CURP Hermano/a</label>
-                                                <input type="text" class="form-control">
+                                    <div class="col-10 col-md-6 col-lg-6"> <label class="form-label">Codigo
+                                            Postal</label>
+                                        <input type="text" class="form-control" formControlName="codigopostal">
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-self-end" *ngIf="postalCode != true">
+                                        <button class="btn btn-md btn-success mt-1"
+                                            (click)="validatorPostCode()">Validar CP</button>
+                                    </div>
+                                    <div class="col-2 col-md-6 col-lg-6 align-self-end" *ngIf="postalCode == true">
+                                        <button class="btn btn-md btn-success mt-1"> <i
+                                                class="bi bi-check-circle"></i></button>
+                                    </div>
+
+                                    <div *ngIf="postalCode == true" class="col-6 col-md-2 col-lg-2"> <label class="form-label">Num.
+                                            Exterior</label>
+                                        <input type="number" class="form-control" formControlName="numext">
+                                    </div>
+                                    <div *ngIf="postalCode == true" class="col-6 col-md-2 col-lg-2"> <label class="form-label">Num.
+                                            Interior</label>
+                                        <input type="text" class="form-control" formControlName="numint">
+                                    </div>
+                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-4"> <label class="form-label">Primer
+                                            Cruce</label>
+                                        <input type="text" class="form-control" formControlName="primercruce">
+                                    </div>
+                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-4"> <label class="form-label">Segundo
+                                            Cruce</label>
+                                        <input type="text" class="form-control" formControlName="segundocruce">
+                                    </div>
+                                    <div *ngIf="postalCode == true" class="col-6 col-md-6 col-lg-3">
+                                        <label class="form-label">Estado</label>
+                                        <select class="form-control" formControlName="estado">
+                                            <option value="">--Seleccionar--</option>
+                                            <option value="Jalisco">Jalisco</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="postalCode == true" class="col-6 col-md-6 col-lg-3">
+                                        <label class="form-label">Municipio</label>
+                                        <select class="form-control" formControlName="municipio">
+                                            <option value="">--Seleccionar--</option>
+                                            <option value="Zapopan">Zapopan</option>
+                                            <option value="Guadalajara">Guadalajara</option>
+                                            <option value="San Pedro Tlaquepaque">San Pedro Tlaquepaque</option>
+                                            <option value="Tonala">Tonala</option>
+                                            <option value="Tlajomulco de Zuñiga">Tlajomulco de Zuñiga</option>
+                                            <option value="Zapotlanejo">Zapotlanejo</option>
+                                            <option value="El Salto">El Salto</option>
+                                            <option value="Acatlan de Juarez">Acatlan de Juarez</option>
+                                            <option value="El Arenal">El Arenal</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-3"> <label class="form-label">Colonia</label>
+                                        <select class="form-control" formControlName="colonia">
+                                            <option value="">-Seleccionar-</option>
+                                            <option *ngFor="let item of suburbs" [value]="item?.id">{{item.colonia}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-3"> <label class="form-label">Celular</label>
+                                        <input type="text" class="form-control" formControlName="celular"></div>
+                                    <hr class="mt-1">
+                                    <h5>Datos CDI</h5>
+                                    <div>
+
+                                    </div>
+                                    <div>
+                                        <ng-container formArrayName="hermanos_en_CDI">
+                                            <div *ngFor="let hermanos_en_CDI of hermanos_en_CDI.controls; let i =index"
+                                                [formGroupName]="i">
+                                                <div class="col-md-6"> <label class="form-label">CURP Hermano/a</label>
+                                                    <input type="text" class="form-control">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </ng-container>
-                                    <button class="btn btn-sm btn-success mt-1" (click)="addHermano()">+</button>
-                                    <button class="btn btn-sm btn-danger mt-1" (click)="deleteHermano()">-</button>
+                                        </ng-container>
+                                        <button class="btn btn-sm btn-success mt-1" (click)="addHermano()">+</button>
+                                        <button class="btn btn-sm btn-danger mt-1" (click)="deleteHermano()">-</button>
+                                    </div>
                                 </div>
-                                <div class="form-check"> <input class="form-check-input" type="checkbox">
+                                <div class="form-check" *ngIf="curp == true"> <input class="form-check-input"
+                                        type="checkbox">
                                     <div class="col-12">
                                         <label class="form-check-label"> Check me out </label>
                                     </div>
                                 </div>
-                                <div class="text-center"> <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="text-center" *ngIf="curp == true"> <button type="submit"
+                                        class="btn btn-primary">Submit</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
                             </form>

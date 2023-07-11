@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CrecheRoutingModule } from './creche-routing.module';
 import { FormChildComponent } from './form-child/form-child.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormParentsComponent } from './form-parents/form-parents.component';
 
 
@@ -16,6 +16,7 @@ import { FormParentsComponent } from './form-parents/form-parents.component';
     CommonModule,
     CrecheRoutingModule,
     ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class CrecheModule { }
