@@ -12,30 +12,30 @@ export class FormChildComponent {
   constructor(private fb: FormBuilder, private crecheService: CrecheService) { }
 
   miFormulario: FormGroup = this.fb.group({
-    curp: ['HECB000817HMNRSNA5',[Validators.required]],
-    nombre: ['',[Validators.required]],
-    apaterno: ['',[Validators.required]],
-    amaterno: ['',[Validators.required]],
+    curp: ['HECB000817HMNRSNA5', [Validators.required]],
+    nombre: ['', [Validators.required]],
+    apaterno: ['', [Validators.required]],
+    amaterno: ['', [Validators.required]],
 
-    fechanacimiento: ['',[Validators.required]],
-    edad: ['',[Validators.required]],
-    sexo: ['',[Validators.required]],
+    fechanacimiento: ['', [Validators.required]],
+    edad: ['', [Validators.required]],
+    sexo: ['', [Validators.required]],
 
-    tipo_sangre: ['',[Validators.required]],
-    calle: ['',[Validators.required]],
-    codigopostal: ['45350',[Validators.required]],
-    estado: [{value: '', disabled: true},[Validators.required]],
-    municipio: [{value: '', disabled: true},[Validators.required]],
-    numext: ['',[Validators.required]],
-    numint: ['',[Validators.nullValidator]],
-    primercruce: ['',[Validators.nullValidator]],
-    segundocruce: ['',[Validators.nullValidator]],
-    colonia: ['',[Validators.required]],
+    tipo_sangre: ['', [Validators.required]],
+    calle: ['', [Validators.required]],
+    codigopostal: ['45350', [Validators.required]],
+    estado: [{ value: '', disabled: true }, [Validators.required]],
+    municipio: [{ value: '', disabled: true }, [Validators.required]],
+    numext: ['', [Validators.required]],
+    numint: ['', [Validators.nullValidator]],
+    primercruce: ['', [Validators.required]],
+    segundocruce: ['', [Validators.nullValidator]],
+    colonia: ['', [Validators.required]],
 
-    celular: ['',[Validators.required]],
+    celular: ['', [Validators.required]],
 
-    enfermedad: ['',[Validators.nullValidator]],
-    enfermedad_otro: ['',[Validators.nullValidator]],
+    enfermedad: ['', [Validators.nullValidator]],
+    enfermedad_otro: ['', [Validators.nullValidator]],
 
     hermanos_en_CDI: new FormArray([
       new FormGroup({
@@ -45,8 +45,13 @@ export class FormChildComponent {
   });
   curp: boolean;
   postalCode: boolean;
-  suburbs : any = null;
-  selectsDisabled: boolean=true;
+  suburbs: any = null;
+  selectsDisabled: boolean = true;
+  showDiv: boolean = false;
+
+  showContent(option: boolean) {
+    this.showDiv = option;
+  }
 
 
   get hermanos_en_CDI(): FormArray {
@@ -62,7 +67,6 @@ export class FormChildComponent {
             nombre: response.nombre,
             amaterno: response.amaterno,
             apaterno: response.apaterno,
-            curp: response.curp,
             sexo: response.sexo,
 
             edad: response.edad,
@@ -83,10 +87,11 @@ export class FormChildComponent {
             enfermedad: response.enfermedad,
             enfermedad_otro: response.enfermedad_otro,
           });
-        } else if (response.nombre){
+          this.miFormulario.get('curp').setValue(response.curp);
+          this.miFormulario.get('curp').disable();
+        } else if (response.nombre) {
           this.curp = true;
           this.miFormulario.patchValue({
-            curp: response.curp,
             nombre: response.nombre,
             apaterno: response.apaterno,
             amaterno: response.amaterno,
@@ -106,6 +111,8 @@ export class FormChildComponent {
             enfermedad: '',
             enfermedad_otro: '',
           })
+          this.miFormulario.get('curp').setValue(response.curp);
+          this.miFormulario.get('curp').disable();
         }
       }, error: (error) => {
         console.log(error);
@@ -114,7 +121,36 @@ export class FormChildComponent {
     })
   }
 
-  validatorPostCode(){
+  backPostCode() {
+    this.postalCode = false;
+    this.miFormulario.patchValue({
+      municipio: "",
+      estado: "",
+    });
+    this.miFormulario.get('codigopostal').setValue("");
+    this.miFormulario.get('codigopostal').enable();
+    this.suburbs = [];
+  }
+
+  backCurp() {
+    this.curp = false;
+    this.miFormulario.patchValue({
+      nombre: "",
+      amaterno: "",
+      apaterno: "",
+      sexo: "",
+
+      edad: "",
+      fechanacimiento: "",
+
+      enfermedad: "",
+      enfermedad_otro: "",
+    });
+    this.miFormulario.get('curp').setValue("");
+    this.miFormulario.get('curp').enable();
+  }
+
+  validatorPostCode() {
     this.crecheService.getPostalCodeInfo(this.miFormulario.value.codigopostal).subscribe({
       next: (response) => {
         if (response[0].id) {
@@ -123,10 +159,11 @@ export class FormChildComponent {
             municipio: response[0].municipio,
             estado: response[0].estado,
           });
+          this.miFormulario.get('codigopostal').setValue(response[0].codigo);
+          this.miFormulario.get('codigopostal').disable();
           this.suburbs = response;
         }
       }, error: (error) => {
-        console.log(error);
         this.hayError = true;
       }
     })
@@ -161,6 +198,15 @@ export class FormChildComponent {
   }
 
   onSubmit() {
-
+    if (this.miFormulario.invalid) {
+      return this.miFormulario.markAllAsTouched();
+    }
+    const data = this.miFormulario.value;
+    console.log(data);
+    this.crecheService.createRequest(data).subscribe(response => {
+      if (response) {
+      } else {
+      }
+    })
   }
 }

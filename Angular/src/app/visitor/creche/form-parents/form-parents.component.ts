@@ -22,7 +22,7 @@ export class FormParentsComponent {
     numext: [[Validators.required]],
     numint: [[Validators.required]],
     primercruce: [[Validators.required]],
-    segundocruce: [[Validators.required]],
+    segundocruce: [[Validators.nullValidator]],
     codigopostal: [[Validators.required]],
     municipio: [[Validators.required]],
     colonia: [[Validators.required]],
@@ -34,25 +34,137 @@ export class FormParentsComponent {
     celular: [[Validators.required]],
   });
 
+  curp: boolean;
+  postalCode: boolean;
+  suburbs: any = null;
+  selectsDisabled: boolean = true;
+  showDiv: boolean = false;
+
+  showContent(option: boolean) {
+    this.showDiv = option;
+  }
+
+  validatorCurp() {
+    this.crecheService.fetchCurp(this.miFormulario.value.curp).subscribe({
+      next: (response) => {
+        if (response.id) {
+          this.curp = true;
+          this.miFormulario.patchValue({
+            nombre: response.nombre,
+            amaterno: response.amaterno,
+            apaterno: response.apaterno,
+            sexo: response.sexo,
+
+            edad: response.edad,
+            fechanacimiento: response.fechanacimiento,
+
+            calle: response.calle,
+            codigopostal: response.codigopostal,
+            estado: response.estado,
+            municipio: response.municipio,
+            numext: response.numext,
+            numint: response.numint,
+            primercruce: response.primercruce,
+            segundocruce: response.segundocruce,
+            colonia: response.colonia,
+
+            celular: response.celular,
+
+            enfermedad: response.enfermedad,
+            enfermedad_otro: response.enfermedad_otro,
+          });
+          this.miFormulario.get('curp').setValue(response.curp);
+          this.miFormulario.get('curp').disable();
+        } else if (response.nombre) {
+          this.curp = true;
+          this.miFormulario.patchValue({
+            nombre: response.nombre,
+            apaterno: response.apaterno,
+            amaterno: response.amaterno,
+            fechanacimiento: response.fechanacimiento,
+            edad: response.edad,
+            sexo: response.sexo,
+            calle: '',
+            // codigopostal: '',
+            estado: '',
+            municipio: '',
+            numext: '',
+            numint: '',
+            primercruce: '',
+            segundocruce: '',
+            colonia: '',
+            celular: '',
+            enfermedad: '',
+            enfermedad_otro: '',
+          })
+          this.miFormulario.get('curp').setValue(response.curp);
+          this.miFormulario.get('curp').disable();
+        }
+      }, error: (error) => {
+        console.log(error);
+        this.hayError = true;
+      }
+    })
+  }
+
+  backPostCode() {
+    this.postalCode = false;
+    this.miFormulario.patchValue({
+      municipio: "",
+      estado: "",
+    });
+    this.miFormulario.get('codigopostal').setValue("");
+    this.miFormulario.get('codigopostal').enable();
+    this.suburbs = [];
+  }
+
+  backCurp() {
+    this.curp = false;
+    this.miFormulario.patchValue({
+      nombre: "",
+      amaterno: "",
+      apaterno: "",
+      sexo: "",
+
+      edad: "",
+      fechanacimiento: "",
+
+      enfermedad: "",
+      enfermedad_otro: "",
+    });
+    this.miFormulario.get('curp').setValue("");
+    this.miFormulario.get('curp').enable();
+  }
+
+  validatorPostCode() {
+    this.crecheService.getPostalCodeInfo(this.miFormulario.value.codigopostal).subscribe({
+      next: (response) => {
+        if (response[0].id) {
+          this.postalCode = true;
+          this.miFormulario.patchValue({
+            municipio: response[0].municipio,
+            estado: response[0].estado,
+          });
+          this.miFormulario.get('codigopostal').setValue(response[0].codigo);
+          this.miFormulario.get('codigopostal').disable();
+          this.suburbs = response;
+        }
+      }, error: (error) => {
+        this.hayError = true;
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.initTable();
   }
   hayError: boolean = false;
-  diseases: any= null;
-  medicalServices: any = null;
-  scholarship: any = null;
-  language: any = null;
-  dwelling: any = null;
-
+  diseases: any = null;
 
   private initTable() {
     this.crecheService.getCatalogs().subscribe({
       next: (catalogs) => {
         this.diseases = catalogs.enfermedad;
-        this.medicalServices = catalogs.serviciosmedicos;
-        this.scholarship = catalogs.escolaridad;
-        this.language = catalogs.idioma;
-        this.dwelling = catalogs.vivienda;
       }, error: () => {
         this.hayError = true;
       }

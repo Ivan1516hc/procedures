@@ -66,6 +66,11 @@ Route::middleware('cors')->group(function () {
         Route::put('creche/beneficiary/update',[BeneficiaryController::class,'updateBeneficiaryCreche']);
         
         Route::get('beneficiary', [BeneficiaryController::class, 'index']);
+
+
+
+        //visitor
+        Route::post('creche/request/create',[RequestsController::class,'store']);
     });
 });
 

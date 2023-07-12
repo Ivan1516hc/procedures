@@ -1,0 +1,171 @@
+<!-- <div class="row mt-5">
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4" *ngFor="let service of services">
+                    <div class="card">
+                        <img [src]="service.image" class="card-img-top" alt="Imagen">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ service.title }}</h5>
+                            <p class="card-text">{{ service.description }}</p>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Abrir modal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> -->
+<div class="row mt-5">
+    <section class="section">
+        <div class="container">
+            <h2>Tramites DIF Zapopan</h2>
+            <hr>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://www.imss.gob.mx/sites/all/statics/styles/flexslider_full/public/i2f_news/Foto%203_53.jpeg?itok=aB_uZeBY"
+                            class="card-img-top" alt="Imagen">
+                        <div class="card-body">
+                            <h5 class="card-title">Guarderias</h5>
+                            <p class="card-text text-justify-custom">Descripci'on del tramite</p>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#crecheModal">
+                                    Ver tramite
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://wpdicta-ha-staticfiles-media-v1.s3.amazonaws.com/wp-content/uploads/2023/01/26165521/WhatsApp-Image-2023-01-26-at-3.38.00-PM.jpg"
+                            class="card-img-top" alt="Imagen">
+                        <div class="card-body">
+                            <h5 class="card-title">Habilitecas: Talleres</h5>
+                            <p class="card-text text-justify-custom">Descripci'on del tramite</p>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#crecheModal">
+                                    Ver tramite
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://servicios.zapopan.gob.mx:8000/wwwportal/publicfiles/2021-10/DSC_0305.JPG"
+                            class="card-img-top" alt="Imagen">
+                        <div class="card-body">
+                            <h5 class="card-title">Atención Psicológica</h5>
+                            <p class="card-text text-justify-custom">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                                tempore, suscipit nisi ut, distinctio quos quasi atque saepe voluptate quam vero
+                                accusantium. Dolorem ducimus voluptatum a, ullam corrupti quidem cupiditate.</p>
+                                <div class="d-flex justify-content-center">
+                                    <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" data-bs-toggle="modal"
+                                        data-bs-target="#crecheModal">
+                                        Ver tramite
+                                    </button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://www.tlajomulco.gob.mx/sites/default/files/080619-Banner-oferta-talleres.png"
+                            class="card-img-top" alt="Imagen">
+                        <div class="card-body">
+                            <h5 class="card-title">CEMAN: Talleres</h5>
+                            <p class="card-text text-justify-custom">Descripci'on del tramite</p>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#crecheModal">
+                                    Ver tramite
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzNkM5q3W4OG2odWXQps7HEii-Q0YCP9f_uA&usqp=CAU"
+                            class="card-img-top" alt="Imagen">
+                        <div class="card-body">
+                            <h5 class="card-title">Autismo</h5>
+                            <p class="card-text text-justify-custom">Descripci'on del tramite</p>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#crecheModal">
+                                    Ver tramite
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div class="modal fade  py-5" id="crecheModal" tabindex="-1" role="dialog" aria-labelledby="crecheModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content  rounded-4 shadow">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="serviceModalLabel">Guarderías</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-0 text-justify-custom">
+                <div class="d-flex justify-content-center">
+                    <img class="img-fluid"
+                        src="https://www.imss.gob.mx/sites/all/statics/styles/flexslider_full/public/i2f_news/Foto%203_53.jpeg?itok=aB_uZeBY"
+                        alt="Service Image">
+                </div>
+                <h5 class="mt-2"><strong>Descripción General</strong></h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Iure, vitae porro. Atque nihil nobis
+                    perferendis unde ducimus repellat nam adipisci quasi exercitationem. Qui ab cum, dolore
+                    aperiam repellat explicabo expedita!</p>
+                <h5><strong>Requisitos</strong></h5>
+                <ul>
+                    <li>Vivir dentro del municipio de Zapopan.</li>
+                    <li>Infante entre 1 año 4 meses y 6 años de edad.</li>
+                </ul>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, iste iusto tempora ipsa aliquid
+                    officia repudiandae incidunt libero pariatur nostrum nobis? Repellendus soluta ullam quas impedit
+                    nesciunt blanditiis sunt voluptates!</p>
+            </div>
+            <div class="modal-footer flex-column border-top-0">
+                <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" (click)="getLocations()">Iniciar Trámite</button>
+                <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal
+<div class="modal fade" id="serviceModal" tabindex="-1" role="dialog" aria-labelledby="serviceModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="serviceModalLabel">{{ selectedService.title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img class="img-fluid" [src]="selectedService.image" alt="Service Image">
+                <p>{{ selectedService.description }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div> -->

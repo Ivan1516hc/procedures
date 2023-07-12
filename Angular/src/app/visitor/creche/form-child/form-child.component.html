@@ -16,36 +16,63 @@
                         <div class="card-body">
                             <h5 class="card-title">Formulario de Infante</h5>
                             <form class="row g-3" [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
-                                <div class="col-10 col-md-6 col-lg-6"> <label class="form-label">Curp</label>
+                                <div class="col-9 col-md-6 col-lg-6">
+                                    <label class="form-label">Curp</label>
                                     <input type="text" class="form-control" formControlName="curp">
+                                    <span class="form-text text-danger form"
+                                        *ngIf="miFormulario.controls['curp'].errors && miFormulario.controls['curp'].touched">
+                                        Curp no valida.
+                                    </span>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-6 align-self-end" *ngIf="curp != true">
-                                    <button class="btn btn-md btn-success mt-1" (click)="validatorCurp()">Validar
+                                    <button type="button" class="btn btn-md btn-success mt-1"
+                                        (click)="validatorCurp()">Validar
                                         Curp</button>
                                 </div>
-                                <div class="col-2 col-md-6 col-lg-6 align-self-end" *ngIf="curp == true">
+                                <!-- <div class="col-2 col-md-6 col-lg-6 align-self-end" *ngIf="curp == true">
                                     <button class="btn btn-md btn-success mt-1"> <i
                                             class="bi bi-check-circle"></i></button>
+                                </div> -->
+                                <div class="col-1 col-md-6 col-lg-6 align-self-end" *ngIf="curp == true">
+                                    <button type="button" class="btn btn-md btn-danger mt-1" (click)="backCurp()">
+                                        <i class="bi bi-arrow-90deg-left"></i>
+                                    </button>
                                 </div>
                                 <div *ngIf="curp == true" class="row">
                                     <hr class="mt-1">
                                     <h5>Datos Generales</h5>
                                     <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Nombre</label>
                                         <input type="email" class="form-control" formControlName="nombre">
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['nombre'].errors && miFormulario.controls['nombre'].touched">
+                                            Nombre requerido.
+                                        </span>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Apellido
                                             Paterno</label>
                                         <input class="form-control" formControlName="apaterno">
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['apaterno'].errors && miFormulario.controls['apaterno'].touched">
+                                            Apellido paterno requerido.
+                                        </span>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6"> <label class="form-label">Apellido
                                             Materno</label>
                                         <input class="form-control" formControlName="amaterno">
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['amaterno'].errors && miFormulario.controls['amaterno'].touched">
+                                            Apellido materno requerido.
+                                        </span>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-2"> <label class="form-label">Fecha de
                                             Nacimiento</label>
                                         <input type="date" class="form-control"
                                             placeholder="Ejemplo de formato 2022-11-04"
                                             formControlName="fechanacimiento">
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['fechanacimiento'].errors && miFormulario.controls['fechanacimiento'].touched">
+                                            Fecha de nacimiento requerida.
+                                        </span>
                                     </div>
                                     <div class="col-6 col-md-6 col-lg-2">
                                         <label class="form-label">Sexo</label>
@@ -54,6 +81,10 @@
                                             <option value="1">Hombre</option>
                                             <option value="2">Mujer</option>
                                         </select>
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['sexo'].errors && miFormulario.controls['sexo'].touched">
+                                            Debes seleccionar una opción.
+                                        </span>
                                     </div>
                                     <div class="col-6 col-md-6 col-lg-2"> <label class="form-label">Tipo de
                                             Sangre</label>
@@ -75,29 +106,56 @@
                                     <div class="col-10 col-md-6 col-lg-6"> <label class="form-label">Codigo
                                             Postal</label>
                                         <input type="text" class="form-control" formControlName="codigopostal">
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['codigopostal'].errors && miFormulario.controls['codigopostal'].touched">
+                                            Se requiere un codigo postal valido.
+                                        </span>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6 align-self-end" *ngIf="postalCode != true">
-                                        <button class="btn btn-md btn-success mt-1"
+                                        <button type="button" class="btn btn-md btn-success mt-1"
                                             (click)="validatorPostCode()">Validar CP</button>
                                     </div>
-                                    <div class="col-2 col-md-6 col-lg-6 align-self-end" *ngIf="postalCode == true">
+                                    <!-- <div class="col-2 col-md-6 col-lg-6 align-self-end" *ngIf="postalCode == true">
                                         <button class="btn btn-md btn-success mt-1"> <i
                                                 class="bi bi-check-circle"></i></button>
+                                    </div> -->
+                                    <div class="col-1 col-md-6 col-lg-6 align-self-end" *ngIf="postalCode == true">
+                                        <button type="button" class="btn btn-md btn-danger mt-1"
+                                            (click)="backPostCode()"> <i class="bi bi-arrow-90deg-left"></i></button>
                                     </div>
-
-                                    <div *ngIf="postalCode == true" class="col-6 col-md-2 col-lg-2"> <label class="form-label">Num.
+                                    <div *ngIf="postalCode == true" class="col-6 col-md-2 col-lg-2"> <label
+                                            class="form-label">Calle</label>
+                                        <input type="text" class="form-control" formControlName="calle">
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['calle'].errors && miFormulario.controls['calle'].touched">
+                                            Calle requerida.
+                                        </span>
+                                    </div>
+                                    <div *ngIf="postalCode == true" class="col-6 col-md-2 col-lg-2"> <label
+                                            class="form-label">Num.
                                             Exterior</label>
                                         <input type="number" class="form-control" formControlName="numext">
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['numext'].errors && miFormulario.controls['numext'].touched">
+                                            Numero exterior requerido.
+                                        </span>
                                     </div>
-                                    <div *ngIf="postalCode == true" class="col-6 col-md-2 col-lg-2"> <label class="form-label">Num.
+                                    <div *ngIf="postalCode == true" class="col-6 col-md-2 col-lg-2"> <label
+                                            class="form-label">Num.
                                             Interior</label>
-                                        <input type="text" class="form-control" formControlName="numint">
+                                        <input type="number" class="form-control" formControlName="numint">
                                     </div>
-                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-4"> <label class="form-label">Primer
+                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-4"> <label
+                                            class="form-label">Primer
                                             Cruce</label>
                                         <input type="text" class="form-control" formControlName="primercruce">
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['primercruce'].errors && miFormulario.controls['primercruce'].touched">
+                                            Primer cruce requerido.
+                                        </span>
                                     </div>
-                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-4"> <label class="form-label">Segundo
+                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-4"> <label
+                                            class="form-label">Segundo
                                             Cruce</label>
                                         <input type="text" class="form-control" formControlName="segundocruce">
                                     </div>
@@ -107,6 +165,10 @@
                                             <option value="">--Seleccionar--</option>
                                             <option value="Jalisco">Jalisco</option>
                                         </select>
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['estado'].errors && miFormulario.controls['estado'].touched">
+                                            Debes seleccionar una opción.
+                                        </span>
                                     </div>
                                     <div *ngIf="postalCode == true" class="col-6 col-md-6 col-lg-3">
                                         <label class="form-label">Municipio</label>
@@ -122,22 +184,44 @@
                                             <option value="Acatlan de Juarez">Acatlan de Juarez</option>
                                             <option value="El Arenal">El Arenal</option>
                                         </select>
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['municipio'].errors && miFormulario.controls['municipio'].touched">
+                                            Debes seleccionar una opción.
+                                        </span>
                                     </div>
-                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-3"> <label class="form-label">Colonia</label>
+                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-3"> <label
+                                            class="form-label">Colonia</label>
                                         <select class="form-control" formControlName="colonia">
                                             <option value="">-Seleccionar-</option>
                                             <option *ngFor="let item of suburbs" [value]="item?.id">{{item.colonia}}
                                             </option>
                                         </select>
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['colonia'].errors && miFormulario.controls['colonia'].touched">
+                                            Debes seleccionar una opción.
+                                        </span>
                                     </div>
-                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-3"> <label class="form-label">Celular</label>
-                                        <input type="text" class="form-control" formControlName="celular"></div>
+                                    <div *ngIf="postalCode == true" class="col-12 col-md-6 col-lg-3"> <label
+                                            class="form-label">Celular</label>
+                                        <input type="number" class="form-control" formControlName="celular">
+                                        <span class="form-text text-danger form"
+                                            *ngIf="miFormulario.controls['celular'].errors && miFormulario.controls['celular'].touched">
+                                            Numero requerido.
+                                        </span>
+                                    </div>
                                     <hr class="mt-1">
                                     <h5>Datos CDI</h5>
-                                    <div>
-
+                                    <p>¿El Infante tiene hermanos en alguna otra guarderia del DIF?</p>
+                                    <div class="col-6">
+                                        <input type="radio" name="option" id="optionYes" (change)="showContent(true)">
+                                        <label for="optionYes">Sí</label>
                                     </div>
-                                    <div>
+                                    <div class="col-6">
+                                        <input type="radio" name="option" id="optionNo" (change)="showContent(false)">
+                                        <label for="optionNo">No</label>
+                                    </div>
+                                    <div *ngIf="showDiv">
+                                        <hr class="mt-1">
                                         <ng-container formArrayName="hermanos_en_CDI">
                                             <div *ngFor="let hermanos_en_CDI of hermanos_en_CDI.controls; let i =index"
                                                 [formGroupName]="i">
@@ -146,19 +230,14 @@
                                                 </div>
                                             </div>
                                         </ng-container>
-                                        <button class="btn btn-sm btn-success mt-1" (click)="addHermano()">+</button>
-                                        <button class="btn btn-sm btn-danger mt-1" (click)="deleteHermano()">-</button>
+                                        <button type="button" class="btn btn-sm btn-success mt-1"
+                                            (click)="addHermano()">+</button>
+                                        <button type="button" class="btn btn-sm btn-danger mt-1"
+                                            (click)="deleteHermano()">-</button>
                                     </div>
                                 </div>
-                                <div class="form-check" *ngIf="curp == true"> <input class="form-check-input"
-                                        type="checkbox">
-                                    <div class="col-12">
-                                        <label class="form-check-label"> Check me out </label>
-                                    </div>
-                                </div>
-                                <div class="text-center" *ngIf="curp == true"> <button type="submit"
-                                        class="btn btn-primary">Submit</button>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                <div class="text-center" *ngIf="curp == true">
+                                    <button type="submit" class="btn btn-success">Guardar</button>
                                 </div>
                             </form>
                         </div>
