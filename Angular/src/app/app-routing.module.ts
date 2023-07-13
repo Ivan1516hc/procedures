@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./visitor/visitor.module').then(m => m.VisitorModule),
+    loadChildren: () => import('./visitor/visitor.module').then(m => m.VisitorModule)
     // canActivate: [validarTokenGuard]
   },
   {

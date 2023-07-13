@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BeneficiaryController;
+use App\Http\Controllers\CenterController;
 use App\Http\Controllers\CrecheController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\QuoteController;
@@ -67,9 +68,9 @@ Route::middleware('cors')->group(function () {
         
         Route::get('beneficiary', [BeneficiaryController::class, 'index']);
 
-
-
         //visitor
+        Route::get('center/procedure/{procedure}',[CenterController::class,'showForProcedure']);
+        Route::get('center/creche/{creche}',[CenterController::class,'showCreche']);
         Route::post('creche/request/create',[RequestsController::class,'store']);
     });
 });

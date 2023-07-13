@@ -9,7 +9,10 @@ import { CrecheService } from '../services/creche.service';
 export class HomepageComponent {
 
   constructor(private crecheService: CrecheService) { }
-  locations:any=null;
+  locations: any = null;
+  selectLocation: any = "";
+  selectCreche: any = "";
+  creches: any = [];
 
   services = [
     {
@@ -29,13 +32,38 @@ export class HomepageComponent {
     }
   ];
 
-  getLocations(){
-    this.crecheService.getLocations().subscribe({next:(response){
-      console.log(response);
-    }})
+  getLocations(id: number) {
+    this.crecheService.getLocations(id).subscribe({
+      next: (response) => {
+        this.locations = response;
+      }
+    })
   }
 
-  getCreches(){
-    
+  createRequest() {
+    if (this.selectCreche != "" && this.selectLocation != "") {
+      const data=[];
+      data['procedure_id'] = localStorage.getItem('procedure');
+      data['center_id'] = this.selectLocation;
+      data['degree_id']= this.selectCreche;
+      this.crecheService.createRequest(data).subscribe({
+        next: (response)=>{
+
+        }
+      })
+    }
+  }
+
+  setProcedure(id:any){
+    localStorage.removeItem('procedure');
+    localStorage.setItem('procedure',id);
+  }
+
+  getCreches() {
+    this.crecheService.getCreches(this.selectLocation).subscribe({
+      next: (response) => {
+        this.creches = response;
+      }
+    })
   }
 }

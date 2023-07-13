@@ -18,15 +18,20 @@ export class CrecheService {
     return this.http.get<any>(url);
   }
 
-  getLocations():Observable<any>{
-    const url = this.baseUrl+'/location/creches';
+  getLocations(id:number):Observable<any>{
+    const url = this.baseUrl+'/center/procedure/'+id;
+    return this.http.get<any>(url);
+  }
+
+  getCreches(id:number):Observable<any>{
+    const url = this.baseUrl+'/center/creche/'+id;
     return this.http.get<any>(url);
   }
   
-  //obtener las salas de un centro y grado especifico
-  requestCreche(data:any): Observable<any> {
-    const url = `${this.baseUrl}/creche/request/`+ data.center_id +`/`+data.degree_id;
-    return this.http.get<any>(url);
+  createRequest(data:any){
+    const url =`${this.baseUrl}/request/create`;
+    const body=JSON.stringify(data);
+     return this.http.post<any>(url,body)
   }
 
   getPostalCodeInfo(value:number){
@@ -94,11 +99,5 @@ export class CrecheService {
     const ageMom = Math.abs(age.getUTCFullYear() - 1970);
 
     return ageMom;
-  }
-
-  createRequest(data:any){
-    const url =`${this.baseUrl}/creche/request/create`;
-    const body=JSON.stringify(data);
-     return this.http.post<any>(url,body)
   }
 }
