@@ -65,7 +65,22 @@ class DatabaseSeeder extends Seeder
         DocumentType::factory(5)->create();
         // Visitor::factory(200)->create();
         Questions::factory(10)->create();
-        Procedure::factory(4)->create();
+        // Procedure::factory(4)->create();
+        Procedure::create([
+            'name' => 'Guarderias'
+        ]);
+        Procedure::create([
+            'name' => 'Habilitecas'
+        ]);
+        Procedure::create([
+            'name' => 'CAP'
+        ]);
+        Procedure::create([
+            'name' => 'CEMAM'
+        ]);
+        Procedure::create([
+            'name' => 'Autismo'
+        ]);
         QuestionProcedure::factory(4)->create();
         Requests::factory(120)->create();
         RequiredDocument::factory(10)->create();

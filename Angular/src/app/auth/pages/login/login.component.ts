@@ -32,7 +32,7 @@ export class LoginComponent  {
         if(code==2){
           this.router.navigateByUrl('/api/guarderia/dashboard')
         }if(code==1){
-          this.router.navigateByUrl('/api/dashboard')
+          this.router.navigateByUrl('/dashboard')
         }
       }else{
         // Swal.fire('Error',response.error.error,'error');

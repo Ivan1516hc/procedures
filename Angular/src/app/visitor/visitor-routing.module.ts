@@ -16,6 +16,11 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [validarTokenGuard]
   }
 ];
 

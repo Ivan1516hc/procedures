@@ -52,7 +52,9 @@ Route::middleware('cors')->group(function () {
     Route::middleware('jwt.verify')->group(function () {
         //Requests
         Route::get('request', [RequestsController::class, 'index']);
+        
         Route::post('request/create',[RequestsController::class,'store']); //Pendiente
+
         Route::put('request/update',[RequestsController::class,'update']);
 
         Route::get('quote', [QuoteController::class, 'index']);
@@ -72,6 +74,7 @@ Route::middleware('cors')->group(function () {
         Route::get('center/procedure/{procedure}',[CenterController::class,'showForProcedure']);
         Route::get('center/creche/{creche}',[CenterController::class,'showCreche']);
         Route::post('creche/request/create',[RequestsController::class,'store']);
+        Route::get('visitor/request',[RequestsController::class,'showVisitorRequest']);
     });
 });
 

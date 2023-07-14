@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CrecheService } from '../services/creche.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -8,7 +9,7 @@ import { CrecheService } from '../services/creche.service';
 })
 export class HomepageComponent {
 
-  constructor(private crecheService: CrecheService) { }
+  constructor(private router:Router,private crecheService: CrecheService) { }
   locations: any = null;
   selectLocation: any = "";
   selectCreche: any = "";
@@ -41,14 +42,22 @@ export class HomepageComponent {
   }
 
   createRequest() {
+    console.log(this.selectCreche,this.selectLocation,localStorage.getItem('procedure'));
     if (this.selectCreche != "" && this.selectLocation != "") {
-      const data=[];
-      data['procedure_id'] = localStorage.getItem('procedure');
-      data['center_id'] = this.selectLocation;
-      data['degree_id']= this.selectCreche;
+      let data={
+        'procedure_id': localStorage.getItem('procedure'),
+        'center_id': this.selectLocation,
+        'degree_id': this.selectCreche
+      };
+      console.log(data);
       this.crecheService.createRequest(data).subscribe({
         next: (response)=>{
-
+          console.log(response);
+          if(response.code == 200){
+            this.router.navigateByUrl('/dashboard');
+          }
+        },error:(error)=>{
+          console.log(error);
         }
       })
     }

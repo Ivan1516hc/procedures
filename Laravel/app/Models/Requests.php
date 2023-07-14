@@ -59,6 +59,11 @@ class Requests extends Model
         return $this->hasOne('App\Models\Center', 'id', 'center_id');
     }
 
+    public function status_request()
+    {
+        return $this->hasOne('App\Models\StatusRequest', 'id', 'status_request_id');
+    }
+
     public function setAttribute($key, $value)
     {
         parent::setAttribute($key, $value);

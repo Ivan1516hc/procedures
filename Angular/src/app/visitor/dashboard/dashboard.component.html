@@ -1,0 +1,94 @@
+<div class="row mt-5">
+    <section class="section">
+        <div class="container">
+            <h2>Administrador de Solicitudes</h2>
+            <hr>
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tabla de Solicitudes</h5>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="text-center">
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Folio</th>
+                                    <th scope="col">Beneficiario</th>
+                                    <th scope="col">Centro</th>
+                                    <th scope="col">Tramite</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr *ngFor="let item of requests; let i=index">
+                                    <td scope="row">{{i+1}}</td>
+                                    <td>{{item?.id}}</td>
+                                    <td *ngIf="item?.beneficiaries.length == 0">
+                                        <div [ngClass]="item?.beneficiaries.length > 0 ? '' : 'alert-danger'">
+                                            No Asignado
+                                        </div>
+                                    </td>
+                                    <td *ngIf="item?.beneficiaries.length > 0">
+                                        {{item?.beneficiaries[0].nombre}} {{item?.beneficiaries[0].apaterno}}
+                                    </td>
+                                    <td>{{item?.center.name}}</td>
+                                    <td>{{item?.procedure.name}}</td>
+                                    <td>
+                                        <div
+                                            [ngClass]="item.status_request_id === 1 ? 'alert-danger' : item.status_request_id === 2 ? 'alert-warning' : item.status_request_id === 4 ? 'alert-danger':'alert-success'">
+                                            {{item?.status_request.name}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button *ngIf="item?.status_request.id == 2"
+                                            class=" btn btn-sm btn-danger m-1">Cancelar</button>
+                                        <button *ngIf="item?.status_request.id == 1"
+                                            class=" btn btn-sm btn-primary m-1">Continuar</button>
+                                        <button *ngIf="item?.status_request.id != 1"
+                                            class=" btn btn-sm btn-info m-1">Ver</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- <div class="modal fade  py-5" id="crecheModal" tabindex="-1" role="dialog" aria-labelledby="crecheModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content  rounded-4 shadow">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="serviceModalLabel">Guarderías</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-0 text-justify-custom">
+                <div class="d-flex justify-content-center">
+                    <img class="img-fluid"
+                        src="https://www.imss.gob.mx/sites/all/statics/styles/flexslider_full/public/i2f_news/Foto%203_53.jpeg?itok=aB_uZeBY"
+                        alt="Service Image">
+                </div>
+                <h5 class="mt-2"><strong>Descripción General</strong></h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Iure, vitae porro. Atque nihil nobis
+                    perferendis unde ducimus repellat nam adipisci quasi exercitationem. Qui ab cum, dolore
+                    aperiam repellat explicabo expedita!</p>
+                <h5><strong>Requisitos</strong></h5>
+                <ul>
+                    <li>Vivir dentro del municipio de Zapopan.</li>
+                    <li>Infante entre 1 año 4 meses y 6 años de edad.</li>
+                </ul>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, iste iusto tempora ipsa aliquid
+                    officia repudiandae incidunt libero pariatur nostrum nobis? Repellendus soluta ullam quas impedit
+                    nesciunt blanditiis sunt voluptates!</p>
+            </div>
+            <div class="modal-footer flex-column border-top-0">
+                <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" (click)="getLocations(1)"
+                    data-bs-toggle="modal" data-bs-target="#locationModal">Ver Disponibilidad</button>
+                <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div> -->

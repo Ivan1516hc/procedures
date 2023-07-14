@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CrecheRequest;
 use App\Models\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,19 @@ class RequestsController extends Controller
         return response()->json($query);
     }
 
+    public function showVisitorRequest()
+    {
+        $user = Auth::user();
+        // if($user->role_id == 1){
+        //     return;
+        // }
+        $model = Requests::query();
+        $model->where('user_id', $user->id)->with('beneficiaries', 'quotes', 'priority', 'procedure', 'center','status_request');
+
+        $query = $model->paginate();
+        return response()->json($query);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -47,7 +61,37 @@ class RequestsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        if ($user->role_id == 1) {
+            return;
+        }
+
+        $requests = Requests::where('procedure_id', $request->procedure_id)->where('user_id', $user->id)->get();
+
+        if ($requests->isEmpty()) {
+            $newRequest = Requests::create([
+                'procedure_id' => $request->procedure_id,
+                'user_id' => $user->id,
+                'center_id' => $request->center_id,
+                'status_request_id' => 1,
+                'priority_id' => 1
+            ]);
+
+            if ($request->procedure_id == 1) {
+                CrecheRequest::create([
+                    'request_id' => $newRequest->id,
+                    'degree_id' => $request->degree_id
+                ]);
+            }
+            $response['message'] = "Tramite Iniciado";
+            $response['code'] = 200;
+        } else {
+            $response['message'] = "Ya hiciste una solicitud para ese tramite";
+            $response['code'] = 202;
+        }
+
+        return response()->json($response);
     }
 
     /**
